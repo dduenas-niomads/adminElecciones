@@ -24,6 +24,7 @@ Route::resource('positions', 'PositionController');
 Route::resource('areas', 'AreaController');
 Route::resource('voters', 'VoterController');
 Route::resource('nominees', 'NomineeController');
+Route::resource('elections', 'ElectionController');
 
 Auth::routes();
 

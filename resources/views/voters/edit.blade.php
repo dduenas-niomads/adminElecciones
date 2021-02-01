@@ -34,6 +34,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a href="/voters" class="btn btn-default active">Atrás</a>
         </form>
     </div>
 </div>

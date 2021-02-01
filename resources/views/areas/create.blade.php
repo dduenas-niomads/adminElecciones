@@ -25,6 +25,7 @@
               <input type="text" class="form-control" name="code"/>
           </div>         
           <button type="submit" class="btn btn-primary">Crear área</button>
+          <a href="/areas" class="btn btn-default active">Atrás</a>
       </form>
   </div>
 </div>

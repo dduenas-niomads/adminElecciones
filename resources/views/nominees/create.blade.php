@@ -44,7 +44,8 @@
                 @endforeach
             </select>
           </div>  
-          <button type="submit" class="btn btn-primary">Crear Posición</button>
+          <button type="submit" class="btn btn-primary">Crear Nominado</button>
+          <a href="/nominees" class="btn btn-default active">Atrás</a>
       </form>
   </div>
 </div>

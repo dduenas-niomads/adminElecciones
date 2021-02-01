@@ -46,6 +46,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a href="/nominees" class="btn btn-default active">Atrás</a>
         </form>
     </div>
 </div>

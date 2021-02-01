@@ -22,6 +22,7 @@
                 <input type="text" class="form-control" name="name" value="{{ $position->name }}" />
             </div>         
             <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a href="/positions" class="btn btn-default active">Atrás</a>
         </form>
     </div>
 </div>
