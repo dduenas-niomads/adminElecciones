@@ -16,4 +16,10 @@ class Position extends Model
         return $this->hasMany('App\Models\Nominee', 'id', 'positions_id')
             ->whereNull('deleted_at');
     }
+
+    public function result()
+    {
+        return $this->hasMany('App\Models\Result', 'id', 'positions_id')
+            ->whereNull('deleted_at');
+    }
 }

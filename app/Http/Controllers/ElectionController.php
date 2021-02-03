@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Election;
+use App\Models\ElectionDetail;
+use App\Models\Area;
+use App\Models\Position;
+use App\Models\Nominee;
 use Illuminate\Http\Request;
+use Redirect;
 
 class ElectionController extends Controller
 {
@@ -81,7 +86,16 @@ class ElectionController extends Controller
     public function edit($id)
     {
         $election = Election::find($id);
-        return view('elections.edit', compact('election'));        
+        $details = ElectionDetail::all();
+        $details = $details->where('elections_id', '=', $election->id);
+        $details = $details->whereNull('deleted_at');
+        $areas = Area::all();
+        $areas = $areas->whereNull('deleted_at');
+        $nominees = Nominee::all();
+        $nominees = $nominees->whereNull('deleted_at');
+        $positions = Position::all();
+        $positions = $positions->whereNull('deleted_at');
+        return view('elections.edit', compact('election', 'nominees', 'positions', 'areas', 'details'));        
     }
 
     /**
@@ -95,16 +109,22 @@ class ElectionController extends Controller
     {
         $request->validate([
             'name'=>'nullable',
-            'status'=>'default:2',
-            'date_end'=>'nullable',
-            'flag_active'=>'default:1'
+            'nominees_id'=>'required',
+            'areas_id'=>'required',
+            'positions_id'=>'required'
         ]);
         $election = Election::find($id);
-        $election->status =  2;
-        $election->date_end =  date('Y-m-d H:i:s');
-        $election->flag_active =  1;
+        $election->name =  $election->name;
+        $election->updated_at =  date('Y-m-d H:i:s');
         $election->save();
-        return redirect('/elections')->with('success', 'Votación actualizada!');
+
+        $detail = new ElectionDetail();
+        $detail->elections_id = $election->id;
+        $detail->nominees_id = $request->get('nominees_id');
+        $detail->areas_id = $request->get('areas_id');
+        $detail->positions_id = $request->get('positions_id');
+        $detail->save();
+        return Redirect::back()->with('success', 'DETALLE ACTUALIZADO!');
     }
 
     /**
@@ -115,9 +135,9 @@ class ElectionController extends Controller
      */
     public function destroy($id)
     {
-        $election = Election::find($id);
-        $election->deleted_at = date("Y-m-d H:i:s");
-        $election->save();
-        return redirect('/elections')->with('success', 'Votación eliminada!');
+        $detail = ElectionDetail::find($id);
+        $detail->deleted_at = date("Y-m-d H:i:s");
+        $detail->save();
+        return Redirect::back()->with('success', 'NOMINADO ELIMINADO CORRECTAMENTE!');
     }
 }

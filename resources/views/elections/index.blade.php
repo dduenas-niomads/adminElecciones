@@ -32,7 +32,7 @@
             <td>{{$election->date_start}}</td>
             <td>{{$election->date_end}}</td>
             <td>
-                <a href="{{ route('elections.edit',$election->id)}}" class="btn btn-danger">Actualizar</a>
+                <a href="{{ route('elections.edit',$election->id)}}" class="btn btn-primary">Detalles</a>
             </td>
             <td>
                 <!-- <form action="{{ route('elections.destroy', $election->id)}}" method="post">

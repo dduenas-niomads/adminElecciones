@@ -22,4 +22,10 @@ class Nominee extends Model
         return $this->belongsTo('App\Models\Position', 'positions_id', 'id')
             ->whereNull('deleted_at');
     }
+
+    public function result()
+    {
+        return $this->hasMany('App\Models\Result', 'id', 'nominees_id')
+            ->whereNull('deleted_at');
+    }
 }
