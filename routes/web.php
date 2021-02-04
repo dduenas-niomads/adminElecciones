@@ -25,7 +25,6 @@ Route::resource('areas', 'AreaController');
 Route::resource('voters', 'VoterController');
 Route::resource('nominees', 'NomineeController');
 Route::resource('elections', 'ElectionController');
-Route::get('/elections/details/{id}', 'ElectionController@show');
 
 Route::resource('results', 'ResultController');
 
