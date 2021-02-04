@@ -1,4 +1,4 @@
-<form action="{{ $item['href'] }}" method="{{ $item['method'] }}" class="form-inline mx-2">
+<!-- <form action="{{ $item['href'] }}" method="{{ $item['method'] }}" class="form-inline mx-2">
     {{ csrf_field() }}
     <div class="input-group">
         <input class="form-control form-control-navbar" type="search" name="{{ $item['input_name'] }}"
@@ -10,4 +10,4 @@
         </div>
     </div>
 </form>
-
+ -->
