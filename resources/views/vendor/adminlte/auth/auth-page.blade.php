@@ -22,7 +22,7 @@
         <div class="{{ $auth_type ?? 'login' }}-logo">
             <a href="{{ $dashboard_url }}">
                 <img src="{{ asset(config('adminlte.logo_img')) }}" height="50">
-                {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+                {!! config('adminlte.logo', '<b>Elecciones</b>2.0') !!}
             </a>
         </div>
 

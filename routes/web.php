@@ -33,6 +33,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Account
+Route::get('/my-account', 'Account\AccountController@myAccount')->name('my-account');
+Route::put('/my-account', 'Account\AccountController@updateMyAccount')->name('update-my-account');
+Route::post('/my-account/logout-all', 'Account\AccountController@logoutAll')->name('logout-all');
