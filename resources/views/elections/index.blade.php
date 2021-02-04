@@ -28,17 +28,17 @@
           <table class="table">
             <thead>
                 <tr>
-                  <td>ID</td>
-                  <td>Nombre</td>
-                  <td>Fecha de Inicio</td>
-                  <td>Fecha de Fin</td>
-                  <td colspan = 2>Acciones</td>
+                  <td><b>ID</b></td>
+                  <td><b>Nombre</b></td>
+                  <td><b>Fecha de Inicio</b></td>
+                  <td><b>Fecha de Fin</b></td>
+                  <td colspan = 2><b>Opciones</b></td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($elections as $election)
                 <tr>
-                    <td>{{$election->id}}</td>
+                    <td>{{ str_pad($election->id, 4, "0", STR_PAD_LEFT) }}</td>
                     <td>{{$election->name}}</td>
                     <td>{{$election->date_start}}</td>
                     <td>{{$election->date_end}}</td>

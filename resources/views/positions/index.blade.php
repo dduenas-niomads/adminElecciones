@@ -28,15 +28,15 @@
           <table class="table">
             <thead>
                 <tr>
-                  <td>ID</td>
-                  <td>Nombre</td>
-                  <td colspan = 2>Acciones</td>
+                  <td><b>ID</b></td>
+                  <td><b>Nombre</b></td>
+                  <td colspan = 2><b>Opciones</b></td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($positions as $position)
                 <tr>
-                    <td>{{$position->id}}</td>
+                    <td>{{ str_pad($position->id, 4, "0", STR_PAD_LEFT) }}</td>
                     <td>{{$position->name}}</td>
                     <td>
                         <a href="{{ route('positions.edit',$position->id)}}" class="btn btn-primary">Editar</a>

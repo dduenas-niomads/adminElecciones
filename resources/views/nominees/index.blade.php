@@ -28,24 +28,24 @@
           <table class="table">
             <thead>
                 <tr>
-                  <td>ID</td>
-                  <td>Nombre</td>
-                  <td>Código</td>
-                  <td>Descripción</td>
-                  <td>Área</td>
-                  <td>Posición</td>
-                  <td colspan = 2>Acciones</td>
+                  <td><b>ID</b></td>
+                  <td><b>Nombre</b></td>
+                  <td><b>Código</b></td>
+                  <td><b>Correo</b></td>
+                  <td><b>Tipo Doc.</b></td>
+                  <td><b>Núm Doc.</b></td>
+                  <td colspan = 2><b>Opciones</b></td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($nominees as $nominee)
                 <tr>
-                    <td>{{$nominee->id}}</td>
+                    <td>{{ str_pad($nominee->id, 4, "0", STR_PAD_LEFT) }}</td>
                     <td>{{$nominee->name}}</td>
                     <td>{{$nominee->code}}</td>
-                    <td>{{$nominee->description}}</td>
-                    <td>{{$nominee->area->name}}</td>
-                    <td>{{$nominee->position->name}}</td>
+                    <td>{{$nominee->email}}</td>
+                    <td>{{$nominee->document_type}}</td>
+                    <td>{{$nominee->document_number}}</td>
                     <td>
                         <a href="{{ route('nominees.edit',$nominee->id)}}" class="btn btn-primary">Editar</a>
                     </td>

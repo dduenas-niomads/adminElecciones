@@ -35,27 +35,23 @@
               <div class="form-group">    
                   <label for="code">Código:</label>
                   <input type="text" class="form-control" name="code"/>
-              </div> 
+              </div>   
               <div class="form-group">    
-                  <label for="description">Descripción:</label>
-                  <input type="text" class="form-control" name="description"/>
-              </div>    
-              <div class="form-group">   
-                <label for="areas_id">Área:</label> 
-                <select name="areas_id" class="form-control">
-                    @foreach($areas as $area)
-                    <option name="areas_id" value="{{ $area->id }}">{{ $area->name }}</option>
-                    @endforeach
-                </select>
+                  <label for="email">Email:</label>
+                  <input type="text" class="form-control" name="email"/>
               </div>   
               <div class="form-group">   
-                <label for="positions_id">Posición:</label> 
-                <select name="positions_id" class="form-control">
-                    @foreach($positions as $position)
-                    <option name="positions_id" value="{{ $position->id }}">{{ $position->name }}</option>
-                    @endforeach
+                <label for="document_type">Tipo de Documento:</label> 
+                <select name="document_type" class="form-control">
+                  <option value="01">DNI</option>
+                  <option value="04">C.E</option>
+                  <option value="07">Pasaporte</option>
                 </select>
               </div>  
+              <div class="form-group">    
+                  <label for="document_number">Número de Documento:</label>
+                  <input type="text" class="form-control" name="document_number"/>
+              </div>
               <button type="submit" class="btn btn-primary">Crear Nominado</button>
               <a href="/nominees" class="btn btn-default active">Atrás</a>
           </form>

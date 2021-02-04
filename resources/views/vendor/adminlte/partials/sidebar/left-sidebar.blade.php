@@ -55,7 +55,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 <li class="nav-item">
                     <a href="/positions" class="nav-link  @yield('nav-positions')">
-                        <i class="fa fa-shopping-cart nav-icon "></i>
+                        <i class="fa fa-users nav-icon "></i>
                         <p>Posiciones</p>
                     </a>
                 </li>
@@ -72,18 +72,18 @@
                 <li class="nav-item">
                     <a href="/elections" class="nav-link  @yield('nav-elections')">
                         <i class="fa fa-file-invoice nav-icon "></i>
-                        <p>Votaciones</p>
+                        <p>Elecciones</p>
                     </a>
                 </li>
             </ul>
-            <!-- <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 <li class="nav-item">
-                    <a href="/contact-support" class="nav-link  @yield('nav-contact-support')">
-                        <i class="fa fa-headset nav-icon "></i>
-                        <p>Soporte técnico</p>
+                    <a href="/voters" class="nav-link  @yield('nav-voters')">
+                        <i class="fa fa-user nav-icon "></i>
+                        <p>Electores</p>
                     </a>
                 </li>
-            </ul> -->
+            </ul>
         </nav>
         <!-- /.sidebar-menu -->
         <nav class="mt-2" style=" bottom: 0;">

@@ -52,7 +52,7 @@
                         <tbody>
                             @foreach($details as $detail)
                             <tr>
-                                <td>{{$detail->id}}</td>
+                                <td>{{ str_pad($detail->id, 4, "0", STR_PAD_LEFT) }}</td>
                                 <td>{{$detail->nominee->name}}</td>
                                 <td>{{$detail->area->name}}</td>
                                 <td>{{$detail->position->name}}</td>

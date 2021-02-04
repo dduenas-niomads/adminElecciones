@@ -54,15 +54,17 @@ class NomineeController extends Controller
             'name'=>'required',
             'code'=>'required',
             'description'=>'nullable',
-            'positions_id'=>'required',
-            'areas_id'=>'required'
+            'email'=>'required',
+            'document_number'=>'required',
+            'document_type'=>'required'
         ]);
         $nominee = new Nominee([
             'name' => $request->get('name'),
             'code' => $request->get('code'),
             'description' => $request->get('description'),
-            'positions_id' => $request->get('positions_id'),
-            'areas_id' => $request->get('areas_id')
+            'email' => $request->get('email'),
+            'document_number' => $request->get('document_number'),
+            'document_type' => $request->get('document_type')
             
         ]);
         $nominee->save();
@@ -109,15 +111,17 @@ class NomineeController extends Controller
             'name'=>'required',
             'code'=>'required',
             'description'=>'nullable',
-            'positions_id'=>'required',
-            'areas_id'=>'required'
+            'email'=>'required',
+            'document_number'=>'required',
+            'document_type'=>'required'
         ]);
         $nominee = Nominee::find($id);
         $nominee->name =  $request->get('name');
         $nominee->code =  $request->get('code');
         $nominee->description =  $request->get('description');
-        $nominee->areas_id =  $request->get('areas_id');
-        $nominee->positions_id =  $request->get('positions_id');
+        $nominee->email =  $request->get('email');
+        $nominee->document_number =  $request->get('document_number');
+        $nominee->document_type =  $request->get('document_type');
         $nominee->save();
         return redirect('/nominees')->with('success', 'Nominado actualizado!');
     }
