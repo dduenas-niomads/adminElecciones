@@ -1,6 +1,7 @@
 @extends('base')
 @extends('layouts.app')
 @section('main')
+
 <div class="col-sm-12">
   @if(session()->get('success'))
     <div class="alert alert-success">
