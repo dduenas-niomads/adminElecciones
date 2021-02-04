@@ -27,7 +27,7 @@
     <tbody>
         @foreach($customers as $customer)
         <tr>
-            <td>{{$customer->id}}</td>
+            <td>{{ str_pad($customer->id, 4, "0", STR_PAD_LEFT) }}</td>
             <td>{{$customer->first_name}} {{$customer->last_name}}</td>
             <td>{{$customer->email}}</td>
             <td>{{$customer->status}}</td>

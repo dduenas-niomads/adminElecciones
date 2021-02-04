@@ -29,16 +29,16 @@
             <table class="table">
               <thead>
                   <tr>
-                    <td>ID</td>
-                    <td>Nombre</td>
-                    <td>Código</td>
-                    <td colspan = 2>Acciones</td>
+                    <td><b>ID</b></td>
+                    <td><b>Nombre</b></td>
+                    <td><b>Código</b></td>
+                    <td colspan = 2><b>Opciones</b></td>
                   </tr>
               </thead>
               <tbody>
                   @foreach($areas as $area)
                   <tr>
-                      <td>{{$area->id}}</td>
+                      <td>{{ str_pad($area->id, 4, "0", STR_PAD_LEFT) }}</td>
                       <td>{{$area->name}}</td>
                       <td>{{$area->code}}</td>
                       <td>
