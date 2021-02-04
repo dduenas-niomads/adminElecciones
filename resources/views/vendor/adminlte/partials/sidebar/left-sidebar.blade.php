@@ -54,25 +54,25 @@
             </ul>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 <li class="nav-item">
-                    <a href="/products" class="nav-link  @yield('nav-products')">
+                    <a href="/positions" class="nav-link  @yield('nav-positions')">
                         <i class="fa fa-shopping-cart nav-icon "></i>
-                        <p>Productos</p>
+                        <p>Posiciones</p>
                     </a>
                 </li>
             </ul>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 <li class="nav-item">
-                    <a href="/orders" class="nav-link  @yield('nav-orders')">
+                    <a href="/nominees" class="nav-link  @yield('nav-nominees')">
                         <i class="fa fa-clipboard-check nav-icon "></i>
-                        <p>Mis Órdenes</p>
+                        <p>Nominados</p>
                     </a>
                 </li>
             </ul>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 <li class="nav-item">
-                    <a href="/payments" class="nav-link  @yield('nav-payments')">
+                    <a href="/elections" class="nav-link  @yield('nav-elections')">
                         <i class="fa fa-file-invoice nav-icon "></i>
-                        <p>Mis pagos</p>
+                        <p>Votaciones</p>
                     </a>
                 </li>
             </ul>
