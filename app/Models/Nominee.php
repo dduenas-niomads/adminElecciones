@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nominee extends Model
 {
     protected $fillable = [
-        'name', 'code', 'description', 'areas_id', 'positions_id'
+        'name', 'code', 'description', 'email', 'document_type', 'document_number'
     ];
 
     public function area()

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Nominados')
+@section('title', 'Candidatos')
 
 @section('content_header')
-    <h1>Listado de nominados<a style="margin: 19px;" href="{{ route('nominees.create')}}" class="btn btn-primary">Nuevo nominado</a> </h1>
+    <h1>Listado de candidatos<a style="margin: 19px;" href="{{ route('nominees.create')}}" class="btn btn-primary">Nuevo canditato</a> </h1>
 @stop
 
 @section('nav-nominees')
@@ -28,24 +28,38 @@
           <table class="table">
             <thead>
                 <tr>
-                  <td>ID</td>
-                  <td>Nombre</td>
-                  <td>Código</td>
-                  <td>Descripción</td>
-                  <td>Área</td>
-                  <td>Posición</td>
-                  <td colspan = 2>Acciones</td>
+                  <td><b>ID</b></td>
+                  <td><b>Nombre</b></td>
+                  <td><b>Código</b></td>
+                  <td><b>Correo</b></td>
+                  <td><b>Tipo Doc.</b></td>
+                  <td><b>Núm Doc.</b></td>
+                  <td colspan = 2><b>Opciones</b></td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($nominees as $nominee)
+                @php
+                  $typeDocumentText = "SIN ESPECIFICAR";
+                  switch ($nominee->document_type) {
+                      case "01":
+                          $typeDocumentText = "CI/DNI";
+                          break;
+                      case "04":
+                          $typeDocumentText = "Carné extranjería";
+                          break;
+                      case "07":
+                          $typeDocumentText = "Pasaporte";
+                          break;
+                  }
+                @endphp
                 <tr>
-                    <td>{{$nominee->id}}</td>
+                    <td>{{ str_pad($nominee->id, 4, "0", STR_PAD_LEFT) }}</td>
                     <td>{{$nominee->name}}</td>
                     <td>{{$nominee->code}}</td>
-                    <td>{{$nominee->description}}</td>
-                    <td>{{$nominee->area->name}}</td>
-                    <td>{{$nominee->position->name}}</td>
+                    <td>{{$nominee->email}}</td>
+                    <td>{{$typeDocumentText}}</td>
+                    <td>{{$nominee->document_number}}</td>
                     <td>
                         <a href="{{ route('nominees.edit',$nominee->id)}}" class="btn btn-primary">Editar</a>
                     </td>
