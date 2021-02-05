@@ -31,6 +31,9 @@
                   <td><b>ID</b></td>
                   <td><b>Nombre</b></td>
                   <td><b>Código</b></td>
+                  <td><b>Documento</b></td>
+                  <td><b>Dependencia</b></td>
+                  <td><b>Edad</b></td>
                   <td><b>Área</b></td>
                   <td colspan = 2><b>Opciones</b></td>
                 </tr>
@@ -41,6 +44,9 @@
                     <td>{{ str_pad($voter->id, 4, "0", STR_PAD_LEFT) }}</td>
                     <td>{{$voter->name}}</td>
                     <td>{{$voter->code}}</td>
+                    <td>{{$voter->document_number}}</td>
+                    <td>{{$voter->dependency}}</td>
+                    <td>{{$voter->age}}</td>
                     <td>{{$voter->area->name}}</td>
                     <td>
                         <a href="{{ route('voters.edit',$voter->id)}}" class="btn btn-primary">Editar</a>

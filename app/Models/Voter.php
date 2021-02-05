@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Voter extends Model
 {
     protected $fillable = [
-        'name', 'code', 'areas_id'
+        'name','lastname','document_number','type_document','dependency', 'age','code', 'areas_id'
     ];
 
     public function area()
