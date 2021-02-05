@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Nominados')
+@section('title', 'Candidatos')
 
 @section('content_header')
-    <h1>Listado de nominados<a style="margin: 19px;" href="{{ route('nominees.create')}}" class="btn btn-primary">Nuevo nominado</a> </h1>
+    <h1>Listado de candidatos<a style="margin: 19px;" href="{{ route('nominees.create')}}" class="btn btn-primary">Nuevo canditato</a> </h1>
 @stop
 
 @section('nav-nominees')
@@ -39,12 +39,26 @@
             </thead>
             <tbody>
                 @foreach($nominees as $nominee)
+                @php
+                  $typeDocumentText = "SIN ESPECIFICAR";
+                  switch ($nominee->document_type) {
+                      case "01":
+                          $typeDocumentText = "CI/DNI";
+                          break;
+                      case "04":
+                          $typeDocumentText = "Carné extranjería";
+                          break;
+                      case "07":
+                          $typeDocumentText = "Pasaporte";
+                          break;
+                  }
+                @endphp
                 <tr>
                     <td>{{ str_pad($nominee->id, 4, "0", STR_PAD_LEFT) }}</td>
                     <td>{{$nominee->name}}</td>
                     <td>{{$nominee->code}}</td>
                     <td>{{$nominee->email}}</td>
-                    <td>{{$nominee->document_type}}</td>
+                    <td>{{$typeDocumentText}}</td>
                     <td>{{$nominee->document_number}}</td>
                     <td>
                         <a href="{{ route('nominees.edit',$nominee->id)}}" class="btn btn-primary">Editar</a>

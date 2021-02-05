@@ -64,7 +64,7 @@
                 <li class="nav-item">
                     <a href="/nominees" class="nav-link  @yield('nav-nominees')">
                         <i class="fa fa-clipboard-check nav-icon "></i>
-                        <p>Nominados</p>
+                        <p>Candidatos</p>
                     </a>
                 </li>
             </ul>
