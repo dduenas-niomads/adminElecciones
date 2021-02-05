@@ -47,7 +47,7 @@
                     <td>{{$voter->document_number}}</td>
                     <td>{{$voter->dependency}}</td>
                     <td>{{$voter->age}}</td>
-                    <td>{{$voter->area->name}}</td>
+                    <td>{{ !is_null($voter->area) ? $voter->area->name: "Sin área" }}</td>
                     <td>
                         <a href="{{ route('voters.edit',$voter->id)}}" class="btn btn-primary">Editar</a>
                     </td>
