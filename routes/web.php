@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/voter-login', function () {
-    return view('welcome');
+    return view('voters.login');
 });
 
 Route::get('/', function () {
-    // return view('welcome');
     return redirect('/login');
 });
 
@@ -39,3 +38,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/my-account', 'Account\AccountController@myAccount')->name('my-account');
 Route::put('/my-account', 'Account\AccountController@updateMyAccount')->name('update-my-account');
 Route::post('/my-account/logout-all', 'Account\AccountController@logoutAll')->name('logout-all');
+
+Route::post('/voter-login-post', 'Voters\VoterController@postLoginVoter')->name('voter-login-post');
+Route::post('/voter-validate-info', 'Voters\VoterController@postInfoVoter')->name('voter-validate-info');
