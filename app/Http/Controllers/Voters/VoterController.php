@@ -75,15 +75,25 @@ class VoterController extends Controller
         $params = $request->all();
         // votante
         $voter = Voter::whereNull(Voter::TABLE_NAME . '.deleted_at')
-            ->where(Voter::TABLE_NAME . '.code', isset($params['code']) ? $params['code'] : null)
+            ->where(Voter::TABLE_NAME . '.code', isset($params['voterCode']) ? $params['voterCode'] : null)
             ->first();
         // candidato
         $nominee = Nominee::find(isset($params['nomineeId']) ? (int)$params['nomineeId'] : null);
         // validación
         if (!is_null($voter) && !is_null($nominee)) {
             // crear voto
-            #codigo de crear voto
+                # lógica de crear voto
             // fin de crear voto
+            // enviar correo
+            if (!is_null($voter->email)) {
+                # lógica de enviar correo
+            }
+            // fin de enviar correo
+            // enviar sms
+            if (!is_null($voter->phone)) {
+                # lógica de enviar sms
+            }
+            // fin de enviar sms
             $view = view('voters.thanks-for-vote', compact('voter'));
         } else {
             $view = view('voters.failed-vote', compact('voter'));
