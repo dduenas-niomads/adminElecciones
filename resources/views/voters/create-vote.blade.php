@@ -92,8 +92,7 @@
                 var nomineeDetail = document.getElementById("nomineeDetail");
                 if (nomineeDetail != null) {
                     nomineeDetail.innerHTML = '<p><b>Código: </b>' + nominee.code + '</p>' +
-                    '<p><b>Nombres y apellidos: </b>' + nominee.name + '</p>' +
-                    '<p><b>Detalle: </b>' + nominee.description + '</p>';
+                    '<p><b>Nombres y apellidos: </b>' + nominee.name + '</p>';
                 }
                 var nomineeId = document.getElementById("nomineeId");
                 if (nomineeId != null) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Voters;
 use App\Models\Area;
 use App\Models\Voter;
 use App\Models\Nominee;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -82,7 +83,10 @@ class VoterController extends Controller
         // validación
         if (!is_null($voter) && !is_null($nominee)) {
             // crear voto
-                # lógica de crear voto
+            $result = new Result();
+            $result->voters_id = $voter->id;
+            $result->nominees_id = $params['nomineeId'];
+            $result->save();
             // fin de crear voto
             // enviar correo
             if (!is_null($voter->email)) {
