@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">REGRESAR</button>
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" onClick="gotoThanks();";>SELECCIONAR</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal" onClick="gotoThanks();";>VOTAR POR ESTE CANDIDATO</button>
                                     </div>
                                 </div>
                             
