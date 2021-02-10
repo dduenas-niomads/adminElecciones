@@ -73,7 +73,6 @@ class VoterController extends Controller
     public function submitVote(Request $request)
     {
         $params = $request->all();
-        dd($params);
         // votante
         $voter = Voter::whereNull(Voter::TABLE_NAME . '.deleted_at')
             ->where(Voter::TABLE_NAME . '.code', isset($params['voterCode']) ? $params['voterCode'] : null)
