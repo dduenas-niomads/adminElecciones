@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">REGRESAR</button>
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" onClick="gotoThanks();";>VOTAR POR ESTE CANDIDATO</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal" onClick="submitVote();";>VOTAR POR ESTE CANDIDATO</button>
                                     </div>
                                 </div>
                             
@@ -65,28 +65,31 @@
     <script src="{{ asset('scripts/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/responsive.bootstrap4.min.js') }}"></script>
     <script>
+        var nominee = null;
         $(document).ready(function (e) {
         
-            gotoThanks = function()  {
+            submitVote = function()  {
                 var voterCode = document.getElementById("voterCode");
                 if (voterCode != null) {
                     voterCode = voterCode.value;
                 } else {
                     voterCode = 0;
                 }
-                window.location.replace("/voter-thanks-for-vote?code=" + voterCode );
+                window.location.replace("/voter-submit-vote?code=" + voterCode + "&nomineeId=" + nominee.id );
             }
 
             openModal = function(params) {
+                nominee = params;
+                console.log(nominee);
                 var nomineeName = document.getElementById("nomineeName");
                 if (nomineeName != null) {
-                    nomineeName.innerHTML = "CANDIDATO: " + params.name;
+                    nomineeName.innerHTML = "CANDIDATO: " + nominee.name;
                 }
                 var nomineeDetail = document.getElementById("nomineeDetail");
                 if (nomineeDetail != null) {
-                    nomineeDetail.innerHTML = '<p><b>Código: </b>' + params.code + '</p>' +
-                    '<p><b>Nombres y apellidos: </b>' + params.name + '</p>' +
-                    '<p><b>Detalle: </b>' + params.code + '</p>';
+                    nomineeDetail.innerHTML = '<p><b>Código: </b>' + nominee.code + '</p>' +
+                    '<p><b>Nombres y apellidos: </b>' + nominee.name + '</p>' +
+                    '<p><b>Detalle: </b>' + nominee.description + '</p>';
                 }
                 
                 $('#modal-info').modal({ backdrop: 'static', keyboard: false });
