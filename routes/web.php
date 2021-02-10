@@ -39,5 +39,5 @@ Route::post('/my-account/logout-all', 'Account\AccountController@logoutAll')->na
 
 Route::post('/voter-login-post', 'Voters\VoterController@postLoginVoter')->name('voter-login-post');
 Route::post('/voter-validate-info', 'Voters\VoterController@postInfoVoter')->name('voter-validate-info');
-Route::get('/voter-submit-vote', 'Voters\VoterController@submitVote')->name('voter-submit-vote');
+Route::post('/voter-submit-vote', 'Voters\VoterController@submitVote')->name('voter-submit-vote');
 Route::get('/voter-thanks-for-vote', 'Voters\VoterController@getThanksforVote')->name('voter-thanks-for-vote');

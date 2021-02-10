@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <input type="hidden" id="voterCode" value="{{ $voter->code }}">
                 <div class="card-header">CREAR VOTO - CI/DNI {{ $voter->document_number }}</div>
                 <div class="card-body">
                     <table class="table" id="example1">
@@ -36,7 +35,12 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">REGRESAR</button>
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" onClick="submitVote();";>VOTAR POR ESTE CANDIDATO</button>
+                                        <form method="POST" action="{{ route('voter-submit-vote') }}">
+                                            @csrf
+                                            <input type="hidden" id="nomineeId" value="0">
+                                            <input type="hidden" id="voterCode" value="{{ $voter->code }}">
+                                            <button type="button" class="btn btn-success" data-dismiss="modal">VOTAR POR ESTE CANDIDATO</button>
+                                        </form>
                                     </div>
                                 </div>
                             
@@ -91,7 +95,10 @@
                     '<p><b>Nombres y apellidos: </b>' + nominee.name + '</p>' +
                     '<p><b>Detalle: </b>' + nominee.description + '</p>';
                 }
-                
+                var nomineeId = document.getElementById("nomineeId");
+                if (nomineeId != null) {
+                    nomineeId.value = nominee.id;
+                }
                 $('#modal-info').modal({ backdrop: 'static', keyboard: false });
             }
             
