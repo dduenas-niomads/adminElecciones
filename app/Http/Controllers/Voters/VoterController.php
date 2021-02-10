@@ -27,18 +27,18 @@ class VoterController extends Controller
         if (!is_null($code)) {
             $voter = Voter::whereNull(Voter::TABLE_NAME . '.deleted_at')
                 ->where(Voter::TABLE_NAME . '.flag_active', Voter::STATE_ACTIVE)
-                ->where(Voter::TABLE_NAME . '.code', $code)
+                ->where(Voter::TABLE_NAME . '.document_number', $code)
                 ->first();
         }
         
         if (!is_null($voter)) {
             $error = false;
-            $message = "Código encontrado";
+            $message = "DNI encontrado";
             $view = view('voters.validate-profile', compact('error', 'message', 'voter'));
             // vista votante encontrado
         } else {
             $error = true;
-            $message = "El código ingresado no fue encontrado en nuestros registros. Por favor, inténtalo nuevamente...";
+            $message = "El DNI ingresado no fue encontrado en nuestros registros. Por favor, inténtalo nuevamente...";
             $view = view('voters.login', compact('error', 'message', 'voter'));
             // vista votante no encontrado
         }
@@ -68,5 +68,15 @@ class VoterController extends Controller
         }
 
         return $view;
+    }
+
+    public function getThanksforVote(Request $request)
+    {
+        $params = $request->all();
+        $voter = Voter::whereNull(Voter::TABLE_NAME . '.deleted_at')
+            ->where(Voter::TABLE_NAME . '.code', isset($params['code']) ? $params['code'] : null)
+            ->first();
+            
+        return view('voters.thanks-for-vote', compact('voter'));
     }
 }

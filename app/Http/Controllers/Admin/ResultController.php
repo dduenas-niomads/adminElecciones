@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Models\Result;
 use App\Models\Position;
 use App\Models\Election;
 use App\Models\Nominee;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ResultController extends Controller
 {

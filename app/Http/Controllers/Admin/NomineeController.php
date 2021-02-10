@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Models\Area;
 use App\Models\Position;
 use App\Models\Nominee;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NomineeController extends Controller
 {
@@ -136,6 +137,7 @@ class NomineeController extends Controller
     {
         $nominee = Nominee::find($id);
         $nominee->deleted_at = date("Y-m-d H:i:s");
+        $nominee->flag_active = Nominee::STATE_INACTIVE;
         $nominee->save();
         return redirect('/nominees')->with('success', 'Nominado eliminado!');
     }

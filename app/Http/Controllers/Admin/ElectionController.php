@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Models\Election;
 use App\Models\ElectionDetail;
 use App\Models\Area;
 use App\Models\Position;
 use App\Models\Nominee;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Redirect;
 
 class ElectionController extends Controller
@@ -137,6 +138,7 @@ class ElectionController extends Controller
     {
         $detail = ElectionDetail::find($id);
         $detail->deleted_at = date("Y-m-d H:i:s");
+        $detail->flag_active = ElectionDetail::STATE_INACTIVE;
         $detail->save();
         return Redirect::back()->with('success', 'NOMINADO ELIMINADO CORRECTAMENTE!');
     }

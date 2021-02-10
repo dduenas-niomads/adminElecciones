@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Area;
+namespace App\Http\Controllers\Admin;
+use App\Models\Position;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AreaController extends Controller
+class PositionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +19,9 @@ class AreaController extends Controller
     
     public function index()
     {
-        $areas = Area::all();
-        $areas = $areas->whereNull('deleted_at');
-        return view('areas.index', compact('areas'));
+        $positions = Position::all();
+        $positions = $positions->whereNull('deleted_at');
+        return view('positions.index', compact('positions'));
     }
 
     /**
@@ -30,7 +31,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return view('areas.create');
+        return view('positions.create');
     }
 
     /**
@@ -42,15 +43,13 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'code'=>'nullable'
+            'name'=>'required'
         ]);
-        $area = new Area([
-            'name' => $request->get('name'),
-            'code' => $request->get('code')
+        $position = new Position([
+            'name' => $request->get('name')
         ]);
-        $area->save();
-        return redirect('/areas')->with('success', 'Área creada!');
+        $position->save();
+        return redirect('/positions')->with('success', 'Posición creada!');
     }
 
     /**
@@ -72,8 +71,8 @@ class AreaController extends Controller
      */
     public function edit($id)
     {
-        $area = Area::find($id);
-        return view('areas.edit', compact('area'));        
+        $position = Position::find($id);
+        return view('positions.edit', compact('position'));        
     }
 
     /**
@@ -86,14 +85,12 @@ class AreaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required',
-            'code'=>'nullable'
+            'name'=>'required'
         ]);
-        $area = Area::find($id);
-        $area->name =  $request->get('name');
-        $area->code =  $request->get('code');
-        $area->save();
-        return redirect('/areas')->with('success', 'Área actualizada!');
+        $position = Position::find($id);
+        $position->name =  $request->get('name');
+        $position->save();
+        return redirect('/positions')->with('success', 'Posición actualizada!');
     }
 
     /**
@@ -104,9 +101,10 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
-        $area = Area::find($id);
-        $area->deleted_at = date("Y-m-d H:i:s");
-        $area->save();
-        return redirect('/areas')->with('success', 'Área eliminada!');
+        $position = Position::find($id);
+        $position->deleted_at = date("Y-m-d H:i:s");
+        $position->flag_active = Position::STATE_INACTIVE;
+        $position->save();
+        return redirect('/positions')->with('success', 'Posición eliminada!');
     }
 }

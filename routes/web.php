@@ -14,21 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/voter-login', function () {
     return view('voters.login');
-});
+})->name('voter-login');
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::resource('customers', 'CustomerController');
-Route::resource('admins', 'AdminController');
-Route::resource('positions', 'PositionController');
-Route::resource('areas', 'AreaController');
-Route::resource('voters', 'VoterController');
-Route::resource('nominees', 'NomineeController');
-Route::resource('elections', 'ElectionController');
+Route::resource('positions', 'Admin\PositionController');
+Route::resource('areas', 'Admin\AreaController');
+Route::resource('voters', 'Admin\VoterController');
+Route::resource('nominees', 'Admin\NomineeController');
+Route::resource('elections', 'Admin\ElectionController');
 
-Route::resource('results', 'ResultController');
+Route::resource('results', 'Admin\ResultController');
 
 Auth::routes();
 
@@ -41,3 +39,4 @@ Route::post('/my-account/logout-all', 'Account\AccountController@logoutAll')->na
 
 Route::post('/voter-login-post', 'Voters\VoterController@postLoginVoter')->name('voter-login-post');
 Route::post('/voter-validate-info', 'Voters\VoterController@postInfoVoter')->name('voter-validate-info');
+Route::get('/voter-thanks-for-vote', 'Voters\VoterController@getThanksforVote')->name('voter-thanks-for-vote');
