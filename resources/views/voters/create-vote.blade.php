@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <input type="hidden" id="voterCode" value="{{ $voter->code }}">
                 <div class="card-header">CREAR VOTO - CI/DNI {{ $voter->document_number }}</div>
                 <div class="card-body">
                     <table class="table" id="example1">
@@ -67,7 +68,13 @@
         $(document).ready(function (e) {
         
             gotoThanks = function()  {
-                window.location.replace("/voter-thanks-for-vote");
+                var voterCode = document.getElementById("voterCode");
+                if (voterCode != null) {
+                    voterCode = voterCode.value;
+                } else {
+                    voterCode = 0;
+                }
+                window.location.replace("/voter-thanks-for-vote?code=" + voterCode );
             }
 
             openModal = function(params) {
