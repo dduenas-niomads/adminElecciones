@@ -20,15 +20,13 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::resource('customers', 'CustomerController');
-Route::resource('admins', 'AdminController');
-Route::resource('positions', 'PositionController');
-Route::resource('areas', 'AreaController');
-Route::resource('voters', 'VoterController');
-Route::resource('nominees', 'NomineeController');
-Route::resource('elections', 'ElectionController');
+Route::resource('positions', 'Admin\PositionController');
+Route::resource('areas', 'Admin\AreaController');
+Route::resource('voters', 'Admin\VoterController');
+Route::resource('nominees', 'Admin\NomineeController');
+Route::resource('elections', 'Admin\ElectionController');
 
-Route::resource('results', 'ResultController');
+Route::resource('results', 'Admin\ResultController');
 
 Auth::routes();
 

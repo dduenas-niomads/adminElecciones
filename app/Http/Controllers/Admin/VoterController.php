@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Models\Area;
 use App\Models\Voter;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class VoterController extends Controller
 {
@@ -117,6 +118,7 @@ class VoterController extends Controller
     {
         $voter = Voter::find($id);
         $voter->deleted_at = date("Y-m-d H:i:s");
+        $voter->flag_active = Voter::STATE_INACTIVE;
         $voter->save();
         return redirect('/voters')->with('success', 'Votante eliminado!');
     }
