@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/voter-login', function () {
     return view('voters.login');
-});
+})->name('voter-login');
 
 Route::get('/', function () {
     return redirect('/login');
@@ -39,3 +39,4 @@ Route::post('/my-account/logout-all', 'Account\AccountController@logoutAll')->na
 
 Route::post('/voter-login-post', 'Voters\VoterController@postLoginVoter')->name('voter-login-post');
 Route::post('/voter-validate-info', 'Voters\VoterController@postInfoVoter')->name('voter-validate-info');
+Route::get('/voter-thanks-for-vote', 'Voters\VoterController@getThanksforVote')->name('voter-thanks-for-vote');

@@ -11,14 +11,12 @@
 
 
         {{-- Content Wrapper --}}
-        <div class="content-wrapper {{ config('adminlte.classes_content_wrapper') ?? '' }}">
 
             {{-- Main Content --}}
             <div class="content">
                     @yield('content')
             </div>
 
-        </div>
 
     </div>
 @stop
