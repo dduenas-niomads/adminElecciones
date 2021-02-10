@@ -70,6 +70,28 @@ class VoterController extends Controller
         return $view;
     }
 
+    public function submitVote(Request $request)
+    {
+        $params = $request->all();
+        // votante
+        $voter = Voter::whereNull(Voter::TABLE_NAME . '.deleted_at')
+            ->where(Voter::TABLE_NAME . '.code', isset($params['code']) ? $params['code'] : null)
+            ->first();
+        // candidato
+        $nominee = Nominee::find(isset($params['nomineeId']) ? (int)$params['nomineeId'] : null);
+        // validación
+        if (!is_null($voter) && !is_null($nominee)) {
+            // crear voto
+            #codigo de crear voto
+            // fin de crear voto
+            $view = view('voters.thanks-for-vote', compact('voter'));
+        } else {
+            $view = view('voters.failed-vote', compact('voter'));
+        }
+
+        return $view;
+    }
+
     public function getThanksforVote(Request $request)
     {
         $params = $request->all();
