@@ -39,7 +39,7 @@
                                             @csrf
                                             <input type="hidden" id="nomineeId" value="0">
                                             <input type="hidden" id="voterCode" value="{{ $voter->code }}">
-                                            <button type="button" class="btn btn-success" data-dismiss="modal">VOTAR POR ESTE CANDIDATO</button>
+                                            <button type="submit" class="btn btn-success" data-dismiss="modal">VOTAR POR ESTE CANDIDATO</button>
                                         </form>
                                     </div>
                                 </div>
