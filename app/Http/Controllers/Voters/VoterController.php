@@ -86,7 +86,18 @@ class VoterController extends Controller
             $result = new Result();
             $result->voters_id = $voter->id;
             $result->nominees_id = $params['nomineeId'];
-            $result->save();
+            try {
+                $result->save();
+            
+            } catch(\Illuminate\Database\QueryException $e){
+                $errorCode = $e->errorInfo[1];
+                if($errorCode == '1062'){
+                    $error = true;
+                    $message = 'Estimado ' . $voter->name . '. La votación se realiza una sola vez.';
+                    $view = view('voters.login', compact('error', 'message', 'voter'));
+                }
+                return $view;
+            }
             // fin de crear voto
             // enviar correo
             if (!is_null($voter->email)) {

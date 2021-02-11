@@ -20,11 +20,11 @@
                             <th>CANTIDAD DE VOTOS</th>
                         </thead>
                         <tbody>
-                            @foreach ($nominees as $nominee)
+                            @foreach ($results as $result)
                                 <tr>
-                                    <td>{{ $nominee->name }}</td>
-                                    <td>{{ $nominee->code }}</td>
-                                    <td>0</td>
+                                    <td>{{ $result->nominee->name }}</td>
+                                    <td>{{ $result->nominee->code }}</td>
+                                    <td>{{ $result->suma }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

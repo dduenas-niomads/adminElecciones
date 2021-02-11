@@ -38,6 +38,7 @@ class Result extends Model
     public function nominee()
     {
         return $this->belongsTo('App\Models\Nominee', 'nominees_id', 'id')
+            ->select('id','name','code')
             ->whereNull('deleted_at');
     }
 

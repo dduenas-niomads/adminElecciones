@@ -32,13 +32,7 @@ class ResultController extends Controller
      */
     public function create()
     {
-        $positions = Position::all();
-        $positions = $positions->whereNull('deleted_at');
-        $elections = Election::all();
-        $elections = $elections->whereNull('deleted_at');
-        $nominees = Nominee::all();
-        $nominees = $nominees->whereNull('deleted_at');
-        return view('results.create', compact('positions', 'nominees', 'elections'));
+        //
     }
 
     /**
@@ -50,11 +44,13 @@ class ResultController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'voters_id'=>'required|unique:results',
             'positions_id'=>'required',
             'elections_id'=>'required',
             'nominees_id'=>'required'
         ]);
         $result = new Result([
+            'voters_id' => $request->get('voters_id'),
             'elections_id' => $request->get('elections_id'),
             'positions_id' => $request->get('positions_id'),
             'nominees_id' => $request->get('nominees_id')

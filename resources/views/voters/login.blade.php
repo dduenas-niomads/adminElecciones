@@ -49,6 +49,9 @@
                     </form>
                 </div>
             </div>
+            <div class="card">
+                <img src="/img/voto2021.jpg" alt="EMPHOST">
+            </div>
         </div>
     </div>
 </div>
