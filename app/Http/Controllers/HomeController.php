@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Nominee;
+use App\Models\Result;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $results = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
+            ->select(DB::raw('count(*) as suma'), 'nominees_id')
+            ->with('nominee')
+            ->groupBy('nominees_id')
+            ->orderBy('suma', 'DESC')
+            ->take(30)
+            ->get();
+        return view('home', compact('results'));
     }
 }

@@ -55,8 +55,8 @@ class NomineeController extends Controller
             'name'=>'required',
             'code'=>'required',
             'description'=>'nullable',
-            'email'=>'required',
-            'document_number'=>'required',
+            'email'=>'nullable',
+            'document_number'=>'nullable',
             'document_type'=>'required'
         ]);
         $nominee = new Nominee([

@@ -49,12 +49,20 @@ class VoterController extends Controller
     {
         $request->validate([
             'name'=>'required',
-            'code'=>'required',
+            'code'=>'nullable',
+            'email'=>'nullable',
+            'type_document'=>'nullable',
+            'document_number'=>'nullable',
+            'phone'=>'nullable',
             'areas_id'=>'required'
         ]);
         $voter = new Voter([
             'name' => $request->get('name'),
             'code' => $request->get('code'),
+            'email' => $request->get('email'),
+            'type_document' => $request->get('type_document'),
+            'document_number' => $request->get('document_number'),
+            'phone' => $request->get('phone'),
             'areas_id' => $request->get('areas_id')
         ]);
         $voter->save();
@@ -97,12 +105,20 @@ class VoterController extends Controller
     {
         $request->validate([
             'name'=>'required',
-            'code'=>'required',
+            'code'=>'nullable',
+            'email'=>'nullable',
+            'type_document'=>'nullable',
+            'document_number'=>'nullable',
+            'phone'=>'nullable',
             'areas_id'=>'required'
         ]);
         $voter = Voter::find($id);
         $voter->name =  $request->get('name');
         $voter->code =  $request->get('code');
+        $voter->email =  $request->get('email');
+        $voter->type_document =  $request->get('type_document');
+        $voter->document_number =  $request->get('document_number');
+        $voter->phone =  $request->get('phone');
         $voter->areas_id =  $request->get('areas_id');
         $voter->save();
         return redirect('/voters')->with('success', 'Votante actualizado!');

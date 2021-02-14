@@ -37,7 +37,27 @@
                 <div class="form-group">
                     <label for="code">Código:</label>
                     <input type="text" class="form-control" name="code" value="{{ $voter->code }}" />
-                </div>    
+                </div>  
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" class="form-control" name="phone" value="{{ $voter->phone }}" />
+                </div>   
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" name="email" value="{{ $voter->email }}" />
+                </div>
+                <div class="form-group">
+                    <label for="document_type">Tipo de Documento:</label>
+                    <select class="form-control" name="document_type">
+                        <option value="1" {{ $voter->document_type == 01 ? 'selected' : '' }}>DNI</option>
+                        <option value="2" {{ $voter->document_type == 04 ? 'selected' : '' }}>C.E</option>
+                        <option value="3" {{ $voter->document_type == 07 ? 'selected' : '' }}>PASAPORTE</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="document_number">Número de Documento:</label>
+                    <input type="text" class="form-control" name="document_number" value="{{ $voter->document_number }}" />
+                </div>
                 <div class="form-group">
                     <label for="areas_id">Área:</label>
                     <select name="areas_id" class="form-control">

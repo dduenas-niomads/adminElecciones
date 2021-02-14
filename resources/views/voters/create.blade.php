@@ -35,7 +35,27 @@
               <div class="form-group">    
                   <label for="code">Código:</label>
                   <input type="text" class="form-control" name="code"/>
-              </div>     
+              </div>  
+              <div class="form-group">    
+                  <label for="email">Email:</label>
+                  <input type="text" class="form-control" name="email"/>
+              </div>   
+              <div class="form-group">    
+                  <label for="phone">Teléfono:</label>
+                  <input type="text" class="form-control" name="phone"/>
+              </div> 
+              <div class="form-group">   
+                <label for="type_document">Tipo de Documento:</label> 
+                <select name="type_document" class="form-control">
+                  <option value="01">DNI</option>
+                  <option value="04">C.E</option>
+                  <option value="07">Pasaporte</option>
+                </select>
+              </div>  
+              <div class="form-group">    
+                  <label for="document_number">Número de Documento:</label>
+                  <input type="text" class="form-control" name="document_number"/>
+              </div>   
               <div class="form-group">   
                 <label for="areas_id">Área:</label> 
                 <select name="areas_id" class="form-control">
