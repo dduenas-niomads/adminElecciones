@@ -1,5 +1,5 @@
-@extends('adminlte::page')
 
+@extends('adminlte::page')
 @section('title', 'Electores')
 
 @section('content_header')
@@ -25,16 +25,17 @@
         </div>
         <div class="row">
         <div class="col-sm-12">
-          <table class="table">
+          <table class="table" id="example1">
             <thead>
                 <tr>
-                  <td><b>ID</b></td>
-                  <td><b>Nombre</b></td>
-                  <td><b>Código</b></td>
-                  <td><b>Tipo de Documento</b></td>
-                  <td><b>Número de Documento</b></td>
-                  <td><b>Área</b></td>
-                  <td colspan = 2><b>Opciones</b></td>
+                  <th><b>ID</b></th>
+                  <th><b>Nombre</b></th>
+                  <th><b>Código</b></th>
+                  <th><b>Tipo de Documento</b></th>
+                  <th><b>Número de Documento</b></th>
+                  <th><b>Área</b></th>
+                  <th></th>
+                  <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -82,9 +83,37 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap4.min.css') }}">
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
+@section('js')
+   <!-- scripts -->
+    <script src="{{ asset('scripts/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('scripts/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('scripts/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('scripts/datatables/responsive.bootstrap4.min.js') }}"></script>
+    <script>
+        $(document).ready(function (e) {
+            
+            $("#example1").DataTable({
+                "info": true,
+                "scrollX": false,
+                "ordering": false,
+                "searching": true,
+                "processing": true,
+                "serverSide": false,
+                "lengthChange": false,
+                "bPaginate": true,
+                "responsive": false,
+                "language": {
+                    "url": "/js/languages/datatables/es.json"
+                },
+                "order": [[ 1, "asc" ]],
+            });
+        });
+    </script>
+@stop
 @stop
