@@ -33,47 +33,11 @@
                   <th><b>Código</b></th>
                   <th><b>Tipo de Documento</b></th>
                   <th><b>Número de Documento</b></th>
-                  <th><b>Área</b></th>
-                  <th></th>
-                  <th></th>
+                  <th><b>Dependencia</b></th>
+                  <th><b>Opciones</b></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach($voters as $voter)
-                @php
-                  $typeDocumentText = "SIN ESPECIFICAR";
-                  switch ($voter->type_document) {
-                      case "01":
-                          $typeDocumentText = "CI/DNI";
-                          break;
-                      case "04":
-                          $typeDocumentText = "Carné extranjería";
-                          break;
-                      case "07":
-                          $typeDocumentText = "Pasaporte";
-                          break;
-                  }
-                @endphp
-                <tr>
-                    <td>{{ str_pad($voter->id, 4, "0", STR_PAD_LEFT) }}</td>
-                    <td>{{$voter->name}}</td>
-                    <td>{{$voter->code}}</td>
-                    <td>{{$typeDocumentText}}</td>
-                    <td>{{$voter->document_number}}</td>
-                    <td>{{ !is_null($voter->area) ? $voter->area->name: "Sin área" }}</td>
-                    <td>
-                        <a href="{{ route('voters.edit',$voter->id)}}" class="btn btn-primary">Editar</a>
-                    </td>
-                    <td>
-                        <form action="{{ route('voters.destroy', $voter->id)}}" method="post">
-                          @csrf
-                          @method('DELETE')
-                          <button class="btn btn-danger" type="submit">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
+            <tbody></tbody>
           </table>
         <div>
       </div>
@@ -88,14 +52,13 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
-@section('js')
    <!-- scripts -->
     <script src="{{ asset('scripts/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/responsive.bootstrap4.min.js') }}"></script>
     <script>
+        var arrayVoters = [];
         $(document).ready(function (e) {
             
             $("#example1").DataTable({
@@ -104,7 +67,7 @@
                 "ordering": false,
                 "searching": true,
                 "processing": true,
-                "serverSide": false,
+                "serverSide": true,
                 "lengthChange": false,
                 "bPaginate": true,
                 "responsive": false,
@@ -112,8 +75,66 @@
                     "url": "/js/languages/datatables/es.json"
                 },
                 "order": [[ 1, "asc" ]],
+                "ajax": function(data, callback, settings) {
+                    $.get('/api/voters', {
+                        limit: data.length,
+                        offset: data.start,
+                        search: data.search,
+                        page: data.start/10 + 1
+                    }, function(res) {
+                        arrayVoters = [];
+                        res.data.forEach(element => {
+                          arrayVoters[element.id] = element;
+                        });
+                        callback({
+                            recordsTotal: res.total,
+                            recordsFiltered: res.total,
+                            data: res.data
+                        });
+                    });
+                },
+                "columns" : [
+                    {'data':   function (data) {
+                      return data.id;
+                    }},
+                    {'data':   function (data) {
+                      return data.name
+                    }},                
+                    {'data':   function (data) {
+                      return data.code; 
+                    }},
+                    {'data':   function (data) {
+                      return "DNI";
+                    }},
+                    {'data':   function (data) {
+                      return data.document_number;
+                    }},
+                    {'data':   function (data) {
+                      return data.dependency;
+                    }},
+                    {'data':   function (data) {
+                        return '<div class="col-md-12 row">' + 
+                        '<button type="button" onClick="openEditModal(' + data.id + ');" class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button><br>' +
+                        '</div>';
+                    }},
+                ],
+                // "rowCallback": function( row, data, index ) {
+                //     var $node = this.api().row(row).nodes().to$();
+                //     var freeDemand = parseFloat(data.on_demand) - parseFloat(data.on_demand_now);
+                //     console.log(freeDemand, freeDemand >= 10);
+                //     if (freeDemand >= 10) {
+                //         $node.addClass('table-success');
+                //     } else if (freeDemand >= 5) {
+                //         $node.addClass('table-warning');
+                //     } else {
+                //         $node.addClass('table-danger');
+                //     }
+                // },
             });
+
+            openEditModal = function (id) {
+              alert(id);
+            }
         });
     </script>
-@stop
 @stop
