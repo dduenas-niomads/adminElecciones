@@ -25,18 +25,6 @@ class VoterController extends Controller
         return view('voters.index', compact('voters', 'areas'));
     }
 
-    public function getVotersSimple()
-    {
-        $voters = Voter::whereNull('deleted_at');
-        $voters = $voters->paginate(env('ITEMS_PAGINATOR'));
-        return response([
-            "status" => !empty($voters) ? true : false,
-            "message" => !empty($voters) ? "list of voters" : "voters not found",
-            "body" => $voters,
-            "redirect" => false
-        ], 200);
-    }
-
     /**
      * Show the form for creating a new resource.
      *

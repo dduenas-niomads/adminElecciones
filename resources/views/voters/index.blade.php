@@ -114,7 +114,7 @@
                     }},
                     {'data':   function (data) {
                         return '<div class="col-md-12 row">' + 
-                        '<button type="button" onClick="openEditModal(' + data.id + ');" class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button><br>' +
+                        '<button type="button" onClick="openEditView(' + data.id + ');" class="btn btn-block btn-outline-warning"><i class="fas fa-edit"></i></button><br>' +
                         '</div>';
                     }},
                 ],
@@ -132,8 +132,8 @@
                 // },
             });
 
-            openEditModal = function (id) {
-              alert(id);
+            openEditView = function (id) {
+              location.href = 'voters/' + id + '/edit';
             }
         });
     </script>
