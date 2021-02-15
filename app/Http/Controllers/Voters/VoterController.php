@@ -117,6 +117,17 @@ class VoterController extends Controller
         return $view;
     }
 
+    public function getVotersJson(Request $request)
+    {
+        $params = $request->all();
+        $voters = Voter::whereNull('deleted_at');
+        if (isset($params['search']['value'])) {
+            $voters = $voters->where('name', 'like', '%' . $params['search']['value'] . '%');
+        }
+        $voters = $voters->paginate(10);
+        return response($voters);
+    }
+
     public function getThanksforVote(Request $request)
     {
         $params = $request->all();

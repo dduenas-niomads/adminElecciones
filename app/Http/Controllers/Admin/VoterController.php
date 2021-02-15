@@ -20,9 +20,8 @@ class VoterController extends Controller
 
     public function index()
     {
-        $voters = Voter::all();
-        $areas = Area::all();
-        $voters = $voters->whereNull('deleted_at');
+        $voters = [];
+        $areas = [];
         return view('voters.index', compact('voters', 'areas'));
     }
 
