@@ -26,6 +26,8 @@ Route::resource('voters', 'Admin\VoterController');
 Route::resource('nominees', 'Admin\NomineeController');
 Route::resource('elections', 'Admin\ElectionController');
 
+Route::get('/voters/simple', 'Admin\VoterController@getVotersSimple');
+
 Route::resource('results', 'Admin\ResultController');
 
 Auth::routes();
