@@ -35,7 +35,20 @@ class VoterController extends Controller
         if (!is_null($voter)) {
             $error = false;
             $message = "DNI encontrado";
-            $view = view('voters.validate-profile', compact('error', 'message', 'voter'));
+            //validacion voto unica vez
+            $result = Voter::join(Result::TABLE_NAME, Result::TABLE_NAME . '.voters_id', '=',
+                Voter::TABLE_NAME . '.id')
+                ->select(Result::TABLE_NAME . '.*')
+                ->whereNull(Result::TABLE_NAME . '.deleted_at')
+                ->where(Result::TABLE_NAME . '.voters_id', '=', $voter->id);
+            if ($result->count('voters_id') < 1) {
+                $view = view('voters.validate-profile', compact('error', 'message', 'voter'));
+            }
+            else {
+                $error = true;
+                $message = "Estimado votante. La votación se realiza solo una vez.";
+                $view = view('voters.login', compact('error', 'message', 'voter'));
+            }
             // vista votante encontrado
         } else {
             $error = true;

@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <table class="table" id="example1">
                         <thead>
-                            <th>CANDIDATO</th>
+                            <th>DELEGADOS GANADORES</th>
                             <th>CÓDIGO</th>
                             <th>CANTIDAD DE VOTOS</th>
                         </thead>
