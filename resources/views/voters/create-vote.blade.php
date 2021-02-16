@@ -60,9 +60,6 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
-
-@section('js')
    <!-- scripts -->
     <script src="{{ asset('scripts/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/dataTables.bootstrap4.min.js') }}"></script>
@@ -112,11 +109,10 @@
                 "bPaginate": true,
                 "responsive": false,
                 "language": {
-                    "url": "/js/languages/datatables/es.json"
+                    "url": "/js/languages/datatables/es_vote.json"
                 },
                 "order": [[ 1, "asc" ]],
             });
         });
     </script>
-@stop
 @stop

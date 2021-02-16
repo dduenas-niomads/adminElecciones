@@ -35,6 +35,7 @@ class VoterController extends Controller
         if (!is_null($voter)) {
             $error = false;
             $message = "DNI encontrado";
+            $firstTime = true;
             //validacion voto unica vez
             $result = Voter::join(Result::TABLE_NAME, Result::TABLE_NAME . '.voters_id', '=',
                 Voter::TABLE_NAME . '.id')
@@ -42,7 +43,7 @@ class VoterController extends Controller
                 ->whereNull(Result::TABLE_NAME . '.deleted_at')
                 ->where(Result::TABLE_NAME . '.voters_id', '=', $voter->id);
             if ($result->count('voters_id') < 1) {
-                $view = view('voters.validate-profile', compact('error', 'message', 'voter'));
+                $view = view('voters.validate-profile', compact('error', 'message', 'voter', 'firstTime'));
             }
             else {
                 $error = true;
@@ -122,7 +123,8 @@ class VoterController extends Controller
                 # lógica de enviar sms
             }
             // fin de enviar sms
-            $view = view('voters.thanks-for-vote', compact('voter'));
+            $thanksForVote = true;
+            $view = view('voters.validate-profile', compact('voter', 'thanksForVote'));
         } else {
             $view = view('voters.failed-vote', compact('voter'));
         }
@@ -141,7 +143,7 @@ class VoterController extends Controller
         return response($voters);
     }
 
-    public function getThanksforVote(Request $request)
+    public function postThanksforVote(Request $request)
     {
         $params = $request->all();
         $voter = Voter::whereNull(Voter::TABLE_NAME . '.deleted_at')

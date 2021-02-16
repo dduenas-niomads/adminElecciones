@@ -3,7 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
+            <div class="card">
+                <img src="/img/voto2021.jpg" alt="EMPHOST">
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Inicio de sesión de votante</div>
 
@@ -48,9 +53,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="card">
-                <img src="/img/voto2021.jpg" alt="EMPHOST">
             </div>
         </div>
     </div>

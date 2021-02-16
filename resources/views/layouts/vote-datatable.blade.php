@@ -13,7 +13,7 @@
         {{-- Content Wrapper --}}
 
             {{-- Main Content --}}
-            <div class="content">
+            <div class="content" style="background: yellowgreen;">
                     @yield('content')
             </div>
 
