@@ -7,6 +7,7 @@ use App\Models\Nominee;
 use App\Models\Result;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\SendVoteResume;
 
 class VoterController extends Controller
 {
@@ -59,6 +60,15 @@ class VoterController extends Controller
         }
 
         return $view;
+    }
+
+    public static function sendEmail($voter)
+    {
+        try {
+            $voter->notify(new SendVoteResume($voter));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function postInfoVoter(Request $request)
@@ -149,7 +159,11 @@ class VoterController extends Controller
         $voter = Voter::whereNull(Voter::TABLE_NAME . '.deleted_at')
             ->where(Voter::TABLE_NAME . '.code', isset($params['code']) ? $params['code'] : null)
             ->first();
-            
+        if (!is_null($voter)) {
+            $voter->fill($params);
+            $voter->save();  
+            $this->sendEmail($voter);
+        }  
         return view('voters.thanks-for-vote', compact('voter'));
     }
 }
