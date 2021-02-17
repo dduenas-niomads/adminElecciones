@@ -3,19 +3,18 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>RESULTADOS DE DELEGADOS GANADORES</h1>
 @stop
 
 @section('content')
-    <p>Tabla de Ganadores</p>
     <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <table class="table" id="example1">
                         <thead>
-                            <th>CANDIDATO</th>
+                            <th>DELEGADOS GANADORES</th>
                             <th>CÓDIGO</th>
                             <th>CANTIDAD DE VOTOS</th>
                         </thead>
@@ -70,7 +69,7 @@
                 "language": {
                     "url": "/js/languages/datatables/es.json"
                 },
-                "order": [[ 1, "asc" ]],
+                "order": [[ 2, "desc" ]],
             });
         });
     </script>

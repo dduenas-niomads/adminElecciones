@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Voter extends Model
 {
+    use  Notifiable;
     protected $connection = 'mysql';
     const TABLE_NAME = 'voters';
     const STATE_ACTIVE = true;

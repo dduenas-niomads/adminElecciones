@@ -9,7 +9,7 @@
                     <form method="GET" action="{{ route('voter-login') }}">
 
                         <div class="form-group row">
-                            <h1>Estimado/a {{ !is_null($voter) ? $voter->name : "" }}, muchas gracias por tu participación en el sistema de elecciones.</h1>
+                            <h1>Estimado/a {{ !is_null($voter) ? $voter->name : "" }}, muchas gracias por tu participación en el sistema de elecciones 2.0.</h1>
                             <h1> Pronto recibirás novedades sobre tu voto.</h1>
                         </div>
 

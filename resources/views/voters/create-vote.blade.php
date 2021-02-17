@@ -5,20 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">CREAR VOTO - CI/DNI {{ $voter->document_number }}</div>
+                <div class="card-header">VOTANTE: {{ $voter->name }} - CI/DNI {{ $voter->document_number }}</div>
                 <div class="card-body">
                     <table class="table" id="example1">
                         <thead>
                             <th>NOMBRES Y APELLIDOS</th>
                             <th>CÓDIGO</th>
-                            <th>SELECCIONAR</th>
+                            <th>ACCIÓN</th>
                         </thead>
                         <tbody>
                             @foreach ($nominees as $nominee)
                                 <tr>
                                     <td>{{ $nominee->name }}</td>
                                     <td>{{ $nominee->code }}</td>
-                                    <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" onClick="openModal( {{ json_encode($nominee) }} );">SELECCIONAR</button></td>
+                                    <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" onClick="openModal( {{ json_encode($nominee) }} );">VOTAR</button></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -58,9 +58,6 @@
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap4.min.css') }}">
 @stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
 
 @section('js')
    <!-- scripts -->
@@ -112,11 +109,10 @@
                 "bPaginate": true,
                 "responsive": false,
                 "language": {
-                    "url": "/js/languages/datatables/es.json"
+                    "url": "/js/languages/datatables/es_vote.json"
                 },
                 "order": [[ 1, "asc" ]],
             });
         });
     </script>
-@stop
 @stop

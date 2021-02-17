@@ -7,6 +7,7 @@ use App\Models\Nominee;
 use App\Models\Result;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\SendVoteResume;
 
 class VoterController extends Controller
 {
@@ -35,7 +36,21 @@ class VoterController extends Controller
         if (!is_null($voter)) {
             $error = false;
             $message = "DNI encontrado";
-            $view = view('voters.validate-profile', compact('error', 'message', 'voter'));
+            $firstTime = true;
+            //validacion voto unica vez
+            $result = Voter::join(Result::TABLE_NAME, Result::TABLE_NAME . '.voters_id', '=',
+                Voter::TABLE_NAME . '.id')
+                ->select(Result::TABLE_NAME . '.*')
+                ->whereNull(Result::TABLE_NAME . '.deleted_at')
+                ->where(Result::TABLE_NAME . '.voters_id', '=', $voter->id);
+            if ($result->count('voters_id') < 1) {
+                $view = view('voters.validate-profile', compact('error', 'message', 'voter', 'firstTime'));
+            }
+            else {
+                $error = true;
+                $message = "Estimado votante. La votación se realiza solo una vez.";
+                $view = view('voters.login', compact('error', 'message', 'voter'));
+            }
             // vista votante encontrado
         } else {
             $error = true;
@@ -45,6 +60,15 @@ class VoterController extends Controller
         }
 
         return $view;
+    }
+
+    public static function sendEmail($voter)
+    {
+        try {
+            $voter->notify(new SendVoteResume($voter));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function postInfoVoter(Request $request)
@@ -109,7 +133,8 @@ class VoterController extends Controller
                 # lógica de enviar sms
             }
             // fin de enviar sms
-            $view = view('voters.thanks-for-vote', compact('voter'));
+            $thanksForVote = true;
+            $view = view('voters.validate-profile', compact('voter', 'thanksForVote'));
         } else {
             $view = view('voters.failed-vote', compact('voter'));
         }
@@ -128,13 +153,17 @@ class VoterController extends Controller
         return response($voters);
     }
 
-    public function getThanksforVote(Request $request)
+    public function postThanksforVote(Request $request)
     {
         $params = $request->all();
         $voter = Voter::whereNull(Voter::TABLE_NAME . '.deleted_at')
             ->where(Voter::TABLE_NAME . '.code', isset($params['code']) ? $params['code'] : null)
             ->first();
-            
+        if (!is_null($voter)) {
+            $voter->fill($params);
+            $voter->save();  
+            $this->sendEmail($voter);
+        }  
         return view('voters.thanks-for-vote', compact('voter'));
     }
 }
