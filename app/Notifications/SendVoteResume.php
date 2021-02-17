@@ -43,9 +43,10 @@ class SendVoteResume extends Notification
         $params = [];
         return (new MailMessage)
                     ->subject('Resumen de su votación')
-                    ->action('Ver resultado', url('https://coopemphost.com.pe/'))
-                    ->line('Gracias por usar el Sistema de Elecciones 2.0!')
-                    ->view('mails.invoice', [ "params" => $params] );
+                    ->action('Ver resultados', url('https://coopemphost.com.pe/'))
+                    ->from('soporte@elecciones20.com', 'Soporte Sistema de Elecciones 2.0')
+                    ->line('Gracias por usar el Sistema de Elecciones 2.0!');
+                    // ->view('mails.invoice', [ "params" => $params] );
     }
 
     /**

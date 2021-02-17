@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Result extends Model
 {
+    use  Notifiable;
     protected $connection = 'mysql';
     const TABLE_NAME = 'results';
     const STATE_ACTIVE = true;

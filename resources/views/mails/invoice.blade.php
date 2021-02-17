@@ -109,9 +109,9 @@
     </thead>
     <tbody>
         <tr>
-            <td>Alvaro Acosta</td>
-            <td>Kevin Díaz</td>
-            <td>14</td>
+            <td>{{ $result->voter->name }}</td>
+            <td>{{ $result->nominee->name }}</td>
+            <td>{{ $result->nominee->code }}</td>
         </tr>
     </tbody>
 </table>
