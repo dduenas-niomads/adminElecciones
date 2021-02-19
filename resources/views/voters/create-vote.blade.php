@@ -84,12 +84,12 @@
                 console.log(nominee);
                 var nomineeName = document.getElementById("nomineeName");
                 if (nomineeName != null) {
-                    nomineeName.innerHTML = "CANDIDATO: " + nominee.name;
+                    nomineeName.innerHTML = "ELEGIR AL CANDIDATO: ";
                 }
                 var nomineeDetail = document.getElementById("nomineeDetail");
                 if (nomineeDetail != null) {
-                    nomineeDetail.innerHTML = '<p><b>Código: </b>' + nominee.code + '</p>' +
-                    '<p><b>Nombres y apellidos: </b>' + nominee.name + '</p>';
+                    nomineeDetail.innerHTML = '<p><b>Apellidos y Nombres: </b>' + nominee.name + '</p>' +
+                    '<p><b>Código: </b>' + nominee.code + '</p>';
                 }
                 var nomineeId = document.getElementById("nomineeId");
                 if (nomineeId != null) {
