@@ -23,19 +23,17 @@
             </div>
           @endif
         </div>
-        <div class="row">
         <div class="col-sm-12"> 
           <table class="table" id="example1">
             <thead>
                 <tr>
-                  <th><b>ID</b></th>
-                  <th><b>Nombre</b></th>
-                  <th><b>Código</b></th>
-                  <th><b>Correo</b></th>
-                  <th><b>Tipo Doc.</b></th>
-                  <th><b>Núm Doc.</b></th>
-                  <th></th>
-                  <th></th>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Código</th>
+                  <th>Correo</th>
+                  <th>Tipo Doc.</th>
+                  <th>Núm Doc.</th>
+                  <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,14 +60,16 @@
                     <td>{{$typeDocumentText}}</td>
                     <td>{{$nominee->document_number}}</td>
                     <td>
+                      <div class="row">
                         <a href="{{ route('nominees.edit',$nominee->id)}}" class="btn btn-primary">Editar</a>
-                    </td>
-                    <td>
+                        <span>&#8287;</span>
                         <form action="{{ route('nominees.destroy', $nominee->id)}}" method="post">
                           @csrf
                           @method('DELETE')
                           <button class="btn btn-danger" type="submit">Eliminar</button>
                         </form>
+                      
+                      </div>
                     </td>
                 </tr>
                 @endforeach
@@ -80,6 +80,10 @@
     </div>
   </div>
 </div>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('css')

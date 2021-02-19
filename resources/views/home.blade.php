@@ -6,6 +6,18 @@
     <h1>RESULTADOS DE DELEGADOS GANADORES</h1>
 @stop
 
+@section('nav-dashboard-menu')
+    active menu-open
+@stop
+
+@section('nav-dashboard')
+    active
+@stop
+
+@section('nav-overview')
+    active
+@stop
+
 @section('content')
     <div class="container">
     <div class="row justify-content-center">

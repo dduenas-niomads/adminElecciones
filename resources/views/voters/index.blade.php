@@ -47,6 +47,10 @@
 @stop
 
 @section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('css')
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap4.min.css') }}">
 @stop

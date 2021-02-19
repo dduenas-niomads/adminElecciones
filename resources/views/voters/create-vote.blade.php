@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10" style="margin: 20px 0 20px 0px;">
             <div class="card">
-                <div class="card-header">VOTANTE: {{ $voter->name }} - CI/DNI {{ $voter->document_number }}</div>
+                <div class="card-header"><b>VOTANTE: {{ $voter->name }} - CI/DNI {{ $voter->document_number }}</b></div>
                 <div class="card-body">
                     <table class="table" id="example1">
                         <thead>
@@ -54,6 +54,10 @@
 </div>
 @endsection
 
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
 @section('css') 
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap4.min.css') }}">
@@ -100,7 +104,7 @@
             
             $("#example1").DataTable({
                 "info": true,
-                "scrollX": false,
+                "scrollX": true,
                 "ordering": false,
                 "searching": true,
                 "processing": true,
@@ -108,6 +112,7 @@
                 "lengthChange": false,
                 "bPaginate": true,
                 "responsive": false,
+                "pageLength": 22,
                 "language": {
                     "url": "/js/languages/datatables/es_vote.json"
                 },
