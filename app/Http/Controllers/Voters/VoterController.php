@@ -62,10 +62,10 @@ class VoterController extends Controller
         return $view;
     }
 
-    public static function sendEmail($voter)
+    public static function sendEmail($result)
     {
         try {
-            $voter->notify(new SendVoteResume($voter));
+            $result->notify(new SendVoteResume($result));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -161,8 +161,16 @@ class VoterController extends Controller
             ->first();
         if (!is_null($voter)) {
             $voter->fill($params);
-            $voter->save();  
-            $this->sendEmail($voter);
+            $voter->save();
+            // get result
+            $result = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
+                ->where(Result::TABLE_NAME . '.voters_id', $voter->id)
+                ->where(Result::TABLE_NAME . '.flag_active', Result::STATE_ACTIVE)
+                ->with('voter')
+                ->with('nominee')
+                ->with('election')
+                ->first();
+            $this->sendEmail($result);
         }  
         return view('voters.thanks-for-vote', compact('voter'));
     }
