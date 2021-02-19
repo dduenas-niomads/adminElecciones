@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 @if (isset($thanksForVote) && $thanksForVote)
-                    <div class="card-header">Por favor, confirma tu información</div>
+                    <div class="card-header">Por favor, ingrese la siguiente información</div>
                 @else
                     <div class="card-header">Bienvenido votante - CI/DNI: {{ $voter->document_number }}</div>
                 @endif
@@ -20,24 +20,24 @@
                             <input type="hidden" name="id" value="{{ $voter->id }}">
                             <input type="hidden" name="code" value="{{ $voter->code }}">
                             @if (!isset($firstTime))
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">APELLIDOS Y NOMBRES: </label>
                                     <div class="col-md-8">
                                         <input id="name" maxlength="100" type="text" class="form-control" name="name" value="{{ $voter->name }}" disabled>
                                     </div>
                                 </div>
-                                <!-- <div class="form-group row">
+                                <div class="form-group row">
                                     <label for="lastname" class="col-md-4 col-form-label text-md-right">APELLIDOS: </label>
                                     <div class="col-md-8">
                                         <input id="lastname" maxlength="100" type="text" class="form-control" name="lastname" value="{{ $voter->lastname }}" disabled>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="form-group row">
                                     <label for="document_number" class="col-md-4 col-form-label text-md-right">CI/DNI: </label>
                                     <div class="col-md-8">
                                         <input id="document_number" maxlength="15" type="text" class="form-control" name="document_number" value="{{ $voter->document_number }}" disabled>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">CORREO ELECTRÓNICO: </label>
                                     <div class="col-md-8">

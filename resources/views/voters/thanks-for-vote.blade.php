@@ -7,10 +7,13 @@
             <div class="card">
                 <div class="card-body">
                     <form method="GET" action="{{ route('voter-login') }}">
-
+                    <div class="img-container" style="text-align: center;">
+                        <img src="/img/voto.jpg" alt="voto" width="120" height="120">
+                    </div>
+                    <h1 style="text-align: center;">Voto Registrado!</h1><br>
                         <div class="form-group row">
-                            <h1>Estimado/a {{ !is_null($voter) ? $voter->name : "" }}, muchas gracias por tu participación en el sistema de elecciones 2.0.</h1>
-                            <h1> Pronto recibirás novedades sobre tu voto.</h1>
+                            <h3>Estimad@ soci@ {{ !is_null($voter) ? $voter->name : "" }}, muchas gracias por participar del proceso de elección de delegados 2021.</h2><br>
+                            <span> * En breve recibirá un email con la confirmación de su voto.</span>
                         </div>
 
                         <div class="form-group row mb-0">
