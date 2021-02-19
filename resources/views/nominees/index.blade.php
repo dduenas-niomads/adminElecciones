@@ -23,7 +23,6 @@
             </div>
           @endif
         </div>
-        <div class="row">
         <div class="col-sm-12"> 
           <table class="table" id="example1">
             <thead>
@@ -81,6 +80,10 @@
     </div>
   </div>
 </div>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('css')
