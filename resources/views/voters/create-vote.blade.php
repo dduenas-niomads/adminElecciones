@@ -13,8 +13,16 @@
                             <th>CÓDIGO</th>
                             <th>ACCIÓN</th>
                         </thead>
-                        <tbody></tbody>
-                          <div class="modal fade bd-example-modal-sm" id="modal-info" role="dialog">
+                        <tbody>
+                            @foreach ($nominees as $nominee)
+                                <tr>
+                                    <td>{{ $nominee->name }}</td>
+                                    <td>{{ $nominee->code }}</td>
+                                    <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" onClick="openModal( {{ json_encode($nominee) }} );">VOTAR</button></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                          <div class="modal fade" id="modal-info" role="dialog">
                             <div class="modal-dialog">
                             
                                 <!-- Modal content-->
@@ -58,58 +66,9 @@
     <script src="{{ asset('scripts/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/responsive.bootstrap4.min.js') }}"></script>
     <script>
-        
-        var arrayNominees = [];
         var nominee = null;
         $(document).ready(function (e) {
-            
-            $("#example1").DataTable({
-                "info": true,
-                "scrollX": false,
-                "ordering": false,
-                "searching": true,
-                "processing": true,
-                "serverSide": true,
-                "lengthChange": false,
-                "bPaginate": true,
-                "responsive": false,
-                "language": {
-                    "url": "/js/languages/datatables/es_vote.json"
-                },
-                "order": [[ 1, "asc" ]],
-                "ajax": function(data, callback, settings) {
-                    $.get('/api/nominees', {
-                        limit: data.length,
-                        offset: data.start,
-                        search: data.search,
-                        page: data.start/22 + 1
-                    }, function(res) {
-                        arrayNominees = [];
-                        res.data.forEach(element => {
-                          arrayNominees[element.id] = element;
-                        });
-                        callback({
-                            recordsTotal: res.total,
-                            recordsFiltered: res.total,
-                            data: res.data
-                        });
-                    });
-                },
-                "columns" : [
-                    {'data':   function (data) {
-                      return data.name
-                    }},                
-                    {'data':   function (data) {
-                      return data.code; 
-                    }},
-                    {'data':   function (data) {
-                        return '<div class="col-md-12 row">' + 
-                        '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" onClick="openModal(' + data.id + ');">VOTAR</button><br>' +
-                        '</div>';
-                    }},
-                ],                
-            });
-
+        
             submitVote = function()  {
                 var voterCode = document.getElementById("voterCode");
                 if (voterCode != null) {
@@ -117,7 +76,7 @@
                 } else {
                     voterCode = 0;
                 }
-                window.location.replace("/voter-submit-vote?code=" + voterCode + "&nomineeId=" + arrayNominees[nominee].id );
+                window.location.replace("/voter-submit-vote?code=" + voterCode + "&nomineeId=" + nominee.id );
             }
 
             openModal = function(params) {
@@ -125,19 +84,35 @@
                 console.log(nominee);
                 var nomineeName = document.getElementById("nomineeName");
                 if (nomineeName != null) {
-                    document.getElementById('nomineeName').innerHTML = "ELEGIR AL CANDIDATO:";
+                    nomineeName.innerHTML = "CANDIDATO: " + nominee.name;
                 }
                 var nomineeDetail = document.getElementById("nomineeDetail");
                 if (nomineeDetail != null) {
-                    document.getElementById('nomineeDetail').innerHTML = '<p><b>Apellidos y nombres: </b>' + arrayNominees[nominee].name + '</p>' + 
-                    '<p><b>Código: </b>' + arrayNominees[nominee].code + '</p>';
+                    nomineeDetail.innerHTML = '<p><b>Código: </b>' + nominee.code + '</p>' +
+                    '<p><b>Nombres y apellidos: </b>' + nominee.name + '</p>';
                 }
                 var nomineeId = document.getElementById("nomineeId");
                 if (nomineeId != null) {
-                    nomineeId.value = arrayNominees[nominee].id;
+                    nomineeId.value = nominee.id;
                 }
                 $('#modal-info').modal({ backdrop: 'static', keyboard: false });
             }
+            
+            $("#example1").DataTable({
+                "info": true,
+                "scrollX": false,
+                "ordering": false,
+                "searching": true,
+                "processing": true,
+                "serverSide": false,
+                "lengthChange": false,
+                "bPaginate": true,
+                "responsive": false,
+                "language": {
+                    "url": "/js/languages/datatables/es_vote.json"
+                },
+                "order": [[ 1, "asc" ]],
+            });
         });
     </script>
 @stop
