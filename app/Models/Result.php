@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 class Result extends Model
 {
     use  Notifiable;
+
     protected $connection = 'mysql';
     const TABLE_NAME = 'results';
     const STATE_ACTIVE = true;
     const STATE_INACTIVE = false;
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'voters_id', 'positions_id', 'nominees_id', 'elections_id',
+        'voters_id', 'positions_id', 'nominees_id', 'elections_id', 'email',
         //Audit 
         'flag_active','created_at','updated_at','deleted_at',
     ];
@@ -55,6 +59,10 @@ class Result extends Model
         return $this->belongsTo('App\Models\Voter', 'voters_id', 'id')
             ->whereNull('deleted_at');
     }
+    
+	public function getCreatedAtAttribute($value) {
+        return date('d/m/Y H:i:s', strtotime($value));
+	}
         /**
      * The attributes that should be hidden for arrays.
      *

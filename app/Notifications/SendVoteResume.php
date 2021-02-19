@@ -6,19 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class SendVoteResume extends Notification
 {
     use Queueable;
+    private $result;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($result)
     {
         //
+        $this->result = $result;
     }
 
     /**
@@ -40,18 +43,16 @@ class SendVoteResume extends Notification
      */
     public function toMail($notifiable)
     {
-        $params = [];
-        return (new MailMessage)
-                    ->subject('Confirmación de voto')
-                    ->greeting('Hola, ' .$notifiable->name . '!')
-                    ->line('Te informamos que tu voto se realizó correctamente!')
-                    // ->action('Ver resultado', url('https://coopemphost.com.pe/'))
-                    // ->line('Gracias por usar el Sistema de Elecciones 2.0!')
-                    // ->view('mails.invoice', [ "params" => $params] );
-                    // ->action('Ver resultados', url('https://coopemphost.com.pe/'))
-                    ->from('soporte@elecciones20.com', 'Soporte Sistema de Elecciones 2.0')
-                    ->line('Muchas gracias por participar del proceso de elección de delegados 2021!');
-                    // ->view('mails.invoice', [ "params" => $params] );
+        try {
+            $view = view('mails.result', [ "result" => $this->result ]);
+            return (new MailMessage)
+                    ->subject('Resultado de elección de delegados 2021')
+                    ->greeting('¡Hola, ' . $this->result->voter->name . '!')
+                    ->line('Te informamos que tu voto se realizó correctamente')
+                    ->line(new HtmlString($view));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

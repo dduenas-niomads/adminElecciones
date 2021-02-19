@@ -62,7 +62,16 @@ class VoterController extends Controller
         return $view;
     }
 
-    public static function sendEmail($voter)
+    public static function sendEmail($result)
+    {
+        try {
+            $result->notify(new SendVoteResume($result));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public static function sendEmailUsingVoter($voter)
     {
         try {
             $voter->notify(new SendVoteResume($voter));
@@ -112,7 +121,6 @@ class VoterController extends Controller
             $result->nominees_id = $params['nomineeId'];
             try {
                 $result->save();
-            
             } catch(\Illuminate\Database\QueryException $e){
                 $errorCode = $e->errorInfo[1];
                 if($errorCode == '1062'){
@@ -123,16 +131,6 @@ class VoterController extends Controller
                 return $view;
             }
             // fin de crear voto
-            // enviar correo
-            if (!is_null($voter->email)) {
-                # lógica de enviar correo
-            }
-            // fin de enviar correo
-            // enviar sms
-            if (!is_null($voter->phone)) {
-                # lógica de enviar sms
-            }
-            // fin de enviar sms
             $thanksForVote = true;
             $view = view('voters.validate-profile', compact('voter', 'thanksForVote'));
         } else {
@@ -161,8 +159,19 @@ class VoterController extends Controller
             ->first();
         if (!is_null($voter)) {
             $voter->fill($params);
-            $voter->save();  
-            $this->sendEmail($voter);
+            $voter->save();
+            // $result
+            $result = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
+                ->where(Result::TABLE_NAME . '.voters_id', $voter->id)
+                ->with('voter')
+                ->with('nominee')
+                ->first();
+            // send email
+            if (!is_null($voter->email) && !is_null($result)) {
+                $result->email = $voter->email;
+                $result->save();
+                $this->sendEmail($result);
+            }
         }  
         return view('voters.thanks-for-vote', compact('voter'));
     }

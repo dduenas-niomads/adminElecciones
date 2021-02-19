@@ -104,7 +104,10 @@
             
             $("#example1").DataTable({
                 "info": true,
-                "scrollX": true,
+                "scrollX": false,            
+                "initComplete": function (settings, json) {  
+                    $("#example1").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+                },
                 "ordering": false,
                 "searching": true,
                 "processing": true,
