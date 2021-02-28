@@ -32,17 +32,6 @@
                             <th>CÓDIGO DE DELEGADO</th>
                             <th>FECHA Y HORA</th>
                         </thead>
-                        <tbody>
-                            @foreach ($results as $result)
-                                <tr>
-                                    <td>{{ $result->voter->name }}</td>
-                                    <td>{{ $result->voter->document_number }}</td>
-                                    <td>{{ $result->nominee->name }}</td>
-                                    <td>{{ $result->nominee->code }}</td>
-                                    <td>{{ $result->created_at }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -67,6 +56,7 @@
     <script src="{{ asset('scripts/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/responsive.bootstrap4.min.js') }}"></script>
     <script>
+        var arrayResults = [];
         $(document).ready(function (e) {
             $("#example1").DataTable({
                 "info": true,
@@ -82,6 +72,41 @@
                     "url": "/js/languages/datatables/es.json"
                 },
                 "order": [[ 4, "desc" ]],
+                "ajax": function(data, callback, settings) {
+                    $.get('/api/details', {
+                        limit: data.length,
+                        offset: data.start,
+                        search: data.search,
+                        page: data.start/10 + 1
+                    }, function(res) {
+                        arrayResults = [];
+                        res.data.forEach(element => {
+                          arrayResults[element.id] = element;
+                        });
+                        callback({
+                            recordsTotal: res.total,
+                            recordsFiltered: res.total,
+                            data: res.data
+                        });
+                    });
+                },
+                "columns" : [
+                    {'data':   function (data) {
+                      return data.voter.name
+                    }},                
+                    {'data':   function (data) {
+                      return data.voter.document_number; 
+                    }},
+                    {'data':   function (data) {
+                      return data.nominee.name;
+                    }},
+                    {'data':   function (data) {
+                      return data.nominee.code;
+                    }},
+                    {'data':   function (data) {
+                      return data.created_at;
+                    }},
+                ],
             });
         });
     </script>

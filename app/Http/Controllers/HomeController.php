@@ -43,6 +43,12 @@ class HomeController extends Controller
     public function detail(Request $request)
     {
         $params = $request->all();
+        return view('detail');
+    }
+
+    public function apiDetail(Request $request)
+    {
+        $params = $request->all();
         $results = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
             ->with('voter')
             ->with('nominee')
@@ -52,6 +58,6 @@ class HomeController extends Controller
         } else {
             $results = $results->paginate(10);
         }
-        return view('home', compact('results'));
+        return $results;
     }
 }
