@@ -53,9 +53,9 @@
                         </div>
                     </form>
                 </div>
-                <div class="card-body">
+                <!-- <div class="card-body">
                     <h2>El proceso de elección 2021 acaba de terminar. Cooperativa de ahorro y crédito agradece tu participación.</h2>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
