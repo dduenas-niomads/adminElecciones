@@ -18,7 +18,11 @@
                                 <tr>
                                     <td>{{ $nominee->name }}</td>
                                     <td>{{ $nominee->code }}</td>
-                                    <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" onClick="openModal( {{ json_encode($nominee) }} );">VOTAR</button></td>
+                                    @if ($nominee->flag_active)
+                                        <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" onClick="openModal( {{ json_encode($nominee) }} );">VOTAR</button></td>
+                                    @else
+                                        <td>{{ $nominee->description }}</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
