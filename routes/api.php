@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/voters', 'Voters\VoterController@getVotersJson');
 Route::get('/nominees', 'Voters\NomineeController@getNomineesJson');
-Route::get('/detail', 'Voters\VoterController@getResultDetails');
+Route::get('/details', 'Voters\VoterController@getResultDetails');
