@@ -24,15 +24,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $results = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
             ->select(DB::raw('count(*) as suma'), 'nominees_id')
             ->with('nominee')
             ->groupBy('nominees_id')
-            ->orderBy('suma', 'DESC')
-            ->take(30)
-            ->get();
+            ->orderBy('suma', 'DESC');
+        if (isset($params['all']) && (int)$params['all']) {
+            $results = $results->get();
+        } else {
+            $results = $results->take(30)->get();
+        }
         return view('home', compact('results'));
     }
 }
