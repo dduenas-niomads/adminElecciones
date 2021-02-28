@@ -62,7 +62,7 @@
                 "info": true,
                 "scrollX": false,
                 "ordering": false,
-                "searching": false,
+                "searching": true,
                 "processing": true,
                 "serverSide": true,
                 "lengthChange": false,
@@ -92,16 +92,16 @@
                 },
                 "columns" : [
                     {'data':   function (data) {
-                      return data.voter.name
+                      return data.voter_name
                     }},                
                     {'data':   function (data) {
-                      return data.voter.document_number; 
+                      return data.voter_document_number; 
                     }},
                     {'data':   function (data) {
-                      return data.nominee.name;
+                      return data.nominee_name;
                     }},
                     {'data':   function (data) {
-                      return data.nominee.code;
+                      return data.nominee_code;
                     }},
                     {'data':   function (data) {
                       return data.created_at;

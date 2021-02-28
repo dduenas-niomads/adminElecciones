@@ -145,14 +145,27 @@ class VoterController extends Controller
     public function getResultDetails(Request $request)
     {
         $params = $request->all();
-        $results = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
-            ->with('voter')
-            ->with('nominee');
-        if (isset($params['electionId']) && (int)$params['electionId']) {
-            $results = $results->where('elections_id', (int)$params['electionId'])->paginate(10);
-        } else {
-            $results = $results->paginate(10);
+        $results = Result::join(Voter::TABLE_NAME, Voter::TABLE_NAME . '.id', '=', Result::TABLE_NAME . '.voters_id')
+            ->join(Nominee::TABLE_NAME, Nominee::TABLE_NAME . '.id', '=', Result::TABLE_NAME . '.nominees_id')
+            ->select(Result::TABLE_NAME . '.created_at', 
+                Voter::TABLE_NAME . '.name as voter_name', 
+                Voter::TABLE_NAME . '.document_number as voter_document_number', 
+                Nominee::TABLE_NAME . '.name as nominee_name', 
+                Nominee::TABLE_NAME . '.code as nominee_code')
+            ->whereNull(Result::TABLE_NAME . '.deleted_at');
+        if (isset($params['search'])) {
+            $key = $params['search'];
+            $list = $list->where(function($query) use ($key){
+                $query->where(Voter::TABLE_NAME . '.name', 'LIKE', '%' . $key . '%');
+                $query->orWhere(Voter::TABLE_NAME . '.document_number', 'LIKE', '%' . $key . '%');
+                $query->orWhere(Nominee::TABLE_NAME . '.name', 'LIKE', '%' . $key . '%');
+                $query->orWhere(Nominee::TABLE_NAME . '.code', 'LIKE', '%' . $key . '%');
+            });
         }
+        if (isset($params['electionId']) && (int)$params['electionId']) {
+            $results = $results->where(Result::TABLE_NAME . '.elections_id', (int)$params['electionId']);
+        }
+        $results = $results->paginate(10);
         return $results;
     }
 
