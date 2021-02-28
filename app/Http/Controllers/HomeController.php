@@ -39,4 +39,20 @@ class HomeController extends Controller
         }
         return view('home', compact('results'));
     }
+
+    public function detail(Request $request)
+    {
+        $params = $request->all();
+        $results = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
+            ->with('voter')
+            ->with('nominee')
+            ->groupBy('nominees_id')
+            ->orderBy('created_at', 'ASC');
+        if (isset($params['electionId']) && (int)$params['electionId']) {
+            $results = $results->where('elections_id', (int)$params['electionId'])->paginate(10);
+        } else {
+            $results = $results->paginate(10);
+        }
+        return view('home', compact('results'));
+    }
 }

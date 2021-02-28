@@ -35,6 +35,7 @@ Route::resource('results', 'Admin\ResultController');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/detail', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
 
 // Account
 Route::get('/my-account', 'Account\AccountController@myAccount')->name('my-account');

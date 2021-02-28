@@ -36,6 +36,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="/detail" class="nav-link @yield('nav-detail')">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Detalle de votación</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/my-account" class="nav-link @yield('nav-account')">
                                 <i class="far fa-id-card nav-icon"></i>
                                 <p>Mi cuenta</p>
