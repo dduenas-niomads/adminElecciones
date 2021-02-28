@@ -69,7 +69,8 @@
                 "bPaginate": true,
                 "responsive": false,
                 "language": {
-                    "url": "/js/languages/datatables/es.json"
+                    "url": "/js/languages/datatables/es.json",
+                    searchPlaceholder: "Por elector o nominado..."
                 },
                 "order": [[ 4, "asc" ]],
                 "ajax": function(data, callback, settings) {
