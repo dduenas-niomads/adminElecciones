@@ -26,6 +26,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $params = $request->all();
         $results = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
             ->select(DB::raw('count(*) as suma'), 'nominees_id')
             ->with('nominee')
