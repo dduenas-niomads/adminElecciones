@@ -41,7 +41,7 @@
                                 <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">CORREO ELECTRÓNICO: </label>
                                     <div class="col-md-8">
-                                        <input id="email" maxlength="100" type="text" class="form-control" name="email" value="{{ $voter->email }}">
+                                        <input id="email" maxlength="100" type="email" class="form-control" name="email" value="{{ $voter->email }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
