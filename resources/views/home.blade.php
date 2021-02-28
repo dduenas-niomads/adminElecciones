@@ -57,19 +57,25 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
-
-@section('js')
    <!-- scripts -->
     <script src="{{ asset('scripts/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('scripts/datatables/responsive.bootstrap4.min.js') }}"></script>
+
+    <!-- buttons -->
+    <script src="{{ asset('/scripts/datatables/buttons/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/scripts/datatables/buttons/buttons.flash.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/scripts/datatables/buttons/jszip.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/scripts/datatables/buttons/pdfmake.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/scripts/datatables/buttons/vfs_fonts.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/scripts/datatables/buttons/buttons.html5.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/scripts/datatables/buttons/buttons.print.min.js') }}" type="text/javascript"></script>
     <script>
         $(document).ready(function (e) {
             
             $("#example1").DataTable({
-                "info": false,
+                "info": true,
                 "scrollX": false,
                 "ordering": false,
                 "searching": true,
@@ -81,9 +87,13 @@
                 "language": {
                     "url": "/js/languages/datatables/es.json"
                 },
+                "dom": 'Bfrtip',
+                "buttons": [
+                    { extend: 'excelHtml5', footer: true },
+                    // { extend: 'pdfHtml5', footer: true, orientation: 'landscape', pageSize: 'LEGAL' }
+                ],
                 "order": [[ 2, "desc" ]],
             });
         });
     </script>
-@stop
 @stop
