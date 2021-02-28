@@ -27,7 +27,7 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <form method="POST" action="{{ route('voter-login-post') }}">
+                    <form method="" action="">
                         @csrf
 
                         <div class="form-group row">
