@@ -155,7 +155,7 @@ class VoterController extends Controller
             ->whereNull(Result::TABLE_NAME . '.deleted_at');
         if (isset($params['search'])) {
             $key = $params['search'];
-            $list = $list->where(function($query) use ($key){
+            $results = $results->where(function($query) use ($key){
                 $query->where(Voter::TABLE_NAME . '.name', 'LIKE', '%' . $key . '%');
                 $query->orWhere(Voter::TABLE_NAME . '.document_number', 'LIKE', '%' . $key . '%');
                 $query->orWhere(Nominee::TABLE_NAME . '.name', 'LIKE', '%' . $key . '%');
