@@ -67,7 +67,7 @@ class VoterController extends Controller
         try {
             $result->notify(new SendVoteResume($result));
         } catch (\Throwable $th) {
-            return;
+            return null;
         }
     }
 
@@ -76,7 +76,7 @@ class VoterController extends Controller
         try {
             $voter->notify(new SendVoteResume($voter));
         } catch (\Throwable $th) {
-            return;
+            throw $th;
         }
     }
 
