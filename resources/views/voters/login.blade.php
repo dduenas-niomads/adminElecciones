@@ -27,7 +27,7 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <form method="" action="">
+                    <form method="POST" action="{{ route('voter-login-post') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -46,9 +46,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <!-- <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Login') }}
-                                </button> -->
+                                </button>
                             </div>
                         </div>
                     </form>
