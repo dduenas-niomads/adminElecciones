@@ -64,7 +64,7 @@
                 "ordering": false,
                 "searching": false,
                 "processing": true,
-                "serverSide": false,
+                "serverSide": true,
                 "lengthChange": false,
                 "bPaginate": true,
                 "responsive": false,
