@@ -170,7 +170,7 @@ class VoterController extends Controller
             if (!is_null($voter->email) && !is_null($result)) {
                 $result->email = $voter->email;
                 $result->save();
-                $this->sendEmail($result);
+                // $this->sendEmail($result);
             }
         }  
         return view('voters.thanks-for-vote', compact('voter'));
