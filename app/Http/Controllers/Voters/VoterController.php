@@ -66,6 +66,8 @@ class VoterController extends Controller
     {
         try {
             $result->notify(new SendVoteResume($result));
+            $result->flag_mail_sended = Result::STATE_ACTIVE;
+            $result->save();
         } catch (\Throwable $th) {
             return null;
         }

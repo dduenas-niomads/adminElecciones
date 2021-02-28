@@ -20,6 +20,7 @@ class Result extends Model
      */
     protected $fillable = [
         'voters_id', 'positions_id', 'nominees_id', 'elections_id', 'email',
+        'flag_mail_sended',
         //Audit 
         'flag_active','created_at','updated_at','deleted_at',
     ];
