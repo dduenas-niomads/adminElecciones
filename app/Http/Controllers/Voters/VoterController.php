@@ -142,6 +142,21 @@ class VoterController extends Controller
         return $view;
     }
 
+    public function getResultDetails(Request $request)
+    {
+        $params = $request->all();
+        $results = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
+            ->with('voter')
+            ->with('nominee')
+            ->orderBy('created_at', 'ASC');
+        if (isset($params['electionId']) && (int)$params['electionId']) {
+            $results = $results->where('elections_id', (int)$params['electionId'])->paginate(10);
+        } else {
+            $results = $results->paginate(10);
+        }
+        return $results;
+    }
+
     public function getVotersJson(Request $request)
     {
         $params = $request->all();
