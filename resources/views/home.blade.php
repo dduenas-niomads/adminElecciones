@@ -73,7 +73,6 @@
     <script src="{{ asset('/scripts/datatables/buttons/buttons.print.min.js') }}" type="text/javascript"></script>
     <script>
         $(document).ready(function (e) {
-            
             $("#example1").DataTable({
                 "info": true,
                 "scrollX": false,
@@ -90,7 +89,8 @@
                 "dom": 'Bfrtip',
                 "buttons": [
                     { extend: 'excelHtml5', footer: true, text: 'Exportar resultados (Excel)' },
-                    // { extend: 'pdfHtml5', footer: true, orientation: 'landscape', pageSize: 'LEGAL' }
+                    { text: '<a href="/home">Ver primeros 30</a>' },
+                    { text: '<a href="/home?all=1">Ver primeros 30</a>' },
                 ],
                 "order": [[ 2, "desc" ]],
             });
