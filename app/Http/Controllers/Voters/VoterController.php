@@ -147,8 +147,7 @@ class VoterController extends Controller
         $params = $request->all();
         $results = Result::whereNull(Result::TABLE_NAME . '.deleted_at')
             ->with('voter')
-            ->with('nominee')
-            ->orderBy('created_at', 'ASC');
+            ->with('nominee');
         if (isset($params['electionId']) && (int)$params['electionId']) {
             $results = $results->where('elections_id', (int)$params['electionId'])->paginate(10);
         } else {

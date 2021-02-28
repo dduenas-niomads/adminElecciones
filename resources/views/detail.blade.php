@@ -71,7 +71,7 @@
                 "language": {
                     "url": "/js/languages/datatables/es.json"
                 },
-                "order": [[ 4, "desc" ]],
+                "order": [[ 4, "asc" ]],
                 "ajax": function(data, callback, settings) {
                     $.get('/api/details', {
                         limit: data.length,
