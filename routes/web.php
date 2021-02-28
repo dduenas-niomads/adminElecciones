@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/loaderio-739a304a77f7f70ee98c2c2b1b175fcb', function() {
+    return "loaderio-739a304a77f7f70ee98c2c2b1b175fcb";
+})->name('loader-io');
+
 Route::get('/voter-login', function () {
     return view('voters.login');
 })->name('voter-login');
