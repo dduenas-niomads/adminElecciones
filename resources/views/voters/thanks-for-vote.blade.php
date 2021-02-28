@@ -13,7 +13,7 @@
                     <h1 style="text-align: center;">Voto Registrado!</h1><br>
                         <div class="form-group row">
                             <h3>Estimad@ soci@ {{ !is_null($voter) ? $voter->name : "" }}, muchas gracias por participar del proceso de elección de delegados 2021.</h2><br>
-                            <span> * En breve recibirá un email con la confirmación de su voto.</span>
+                            <span> * Recibirá un correo electrónico con el detalle de su voto.</span>
                         </div>
 
                         <div class="form-group row mb-0">
