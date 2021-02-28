@@ -89,7 +89,7 @@
                 },
                 "dom": 'Bfrtip',
                 "buttons": [
-                    { extend: 'excelHtml5', footer: true },
+                    { extend: 'excelHtml5', footer: true, text: 'Exportar resultados (Excel)' },
                     // { extend: 'pdfHtml5', footer: true, orientation: 'landscape', pageSize: 'LEGAL' }
                 ],
                 "order": [[ 2, "desc" ]],
