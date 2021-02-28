@@ -89,8 +89,12 @@
                 "dom": 'Bfrtip',
                 "buttons": [
                     { extend: 'excelHtml5', footer: true, text: 'Exportar resultados (Excel)' },
-                    { text: '<a href="/home">Ver primeros 30</a>' },
-                    { text: '<a href="/home?all=1">Ver primeros 30</a>' },
+                    { text: 'Ver primeros 30', action: function ( e, dt, button, config ) {
+                        window.location = '/home';
+                    }},
+                    { text: 'Ver todos', action: function ( e, dt, button, config ) {
+                        window.location = '/home?all=1';
+                    }},
                 ],
                 "order": [[ 2, "desc" ]],
             });
